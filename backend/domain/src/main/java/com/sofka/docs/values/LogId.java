@@ -1,4 +1,4 @@
 package com.sofka.docs.values;
 
-public class logId {
+public class LogId {
 }
