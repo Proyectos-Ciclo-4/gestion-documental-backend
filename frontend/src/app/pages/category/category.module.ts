@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { CategoryComponent } from './category.component';
-
+import { CommonModule, NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 @NgModule({
   declarations: [
-    CategoryComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    BrowserModule
   ]
 })
 export class CategoryModule { }
