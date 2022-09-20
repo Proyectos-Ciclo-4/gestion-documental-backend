@@ -12,4 +12,8 @@ export class ViewDocumentComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getDocument(){
+
+  }
+
 }

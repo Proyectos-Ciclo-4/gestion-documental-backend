@@ -12,4 +12,6 @@ import { ViewDocumentComponent } from './view-document.component';
     CommonModule
   ]
 })
-export class ViewDocumentModule { }
+export class ViewDocumentModule {
+
+}
