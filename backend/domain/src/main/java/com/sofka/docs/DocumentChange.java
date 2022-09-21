@@ -26,6 +26,6 @@ public class DocumentChange extends EventChange {
             document.category= new CategoryDoc(new CategoryId(event.getId()),new CategoryName(event.getCategoryName()));
         });
 
-        
+
     }
 }
