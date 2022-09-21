@@ -28,6 +28,7 @@ import java.util.Objects;
 public class Document extends AggregateEvent<DocumentId> {
     protected Map<DocumentId, UserId> downloads;
     protected DocName name;
+
     protected CategoryDoc category;
     protected LogHistory logHistory;
     protected CreatedDate createdDate;
