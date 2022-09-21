@@ -4,7 +4,7 @@ import co.com.sofka.domain.generic.Identity;
 
 public class DocumentId extends Identity {
 
-    private DocumentId(String uuid){
+    public DocumentId(String uuid){
         super(uuid);
     }
 
