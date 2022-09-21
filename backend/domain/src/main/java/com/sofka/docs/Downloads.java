@@ -15,4 +15,20 @@ public class Downloads extends Entity<DownloadId> {
         this.numberDownloads = numberDownloads;
         this.documentId = documentId;
     }
+
+    public NumberDownloads getNumberDownloads() {
+        return numberDownloads;
+    }
+
+    public DocumentId getDocumentId() {
+        return documentId;
+    }
+
+    public void setNumberDownloads(NumberDownloads numberDownloads) {
+        this.numberDownloads = numberDownloads;
+    }
+
+    public void setDocumentId(DocumentId documentId) {
+        this.documentId = documentId;
+    }
 }

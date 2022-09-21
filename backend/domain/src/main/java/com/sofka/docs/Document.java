@@ -26,8 +26,10 @@ public class Document extends AggregateEvent<DocumentId> {
     protected DocName name;
     protected SubCategory subCategory;
     protected CategoryDoc category;
+
     protected LogHistory logHistory;
     protected CreatedDate createdDate;
+
     protected VersionDocument version;
     protected PathDocument pathDocument;
     protected BlockChainId blockChainId;
