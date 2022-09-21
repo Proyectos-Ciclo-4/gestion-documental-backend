@@ -14,13 +14,9 @@ import com.sofka.docs.values.Descriptiondoc;
 import com.sofka.docs.values.DocName;
 import com.sofka.docs.values.DocumentId;
 import com.sofka.docs.values.PathDocument;
-import com.sofka.docs.values.SubCategory;
-import com.sofka.docs.values.UpdatedDate;
 import com.sofka.docs.values.UserId;
 import com.sofka.docs.values.VersionDocument;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -28,7 +24,7 @@ import java.util.Objects;
 public class Document extends AggregateEvent<DocumentId> {
     protected Map<DocumentId, UserId> downloads;
     protected DocName name;
-
+    protected SubCategory subCategory;
     protected CategoryDoc category;
     protected LogHistory logHistory;
     protected CreatedDate createdDate;
@@ -71,8 +67,8 @@ public class Document extends AggregateEvent<DocumentId> {
 
     public void createSubCategory(CategoryId categoryId, SubCategory subCategory){
         Objects.requireNonNull(categoryId);
-        Objects.requireNonNull(subCategory.value());
-        appendChange(new SubCategoryCreated(categoryId.value(), subCategory.value())).apply();
+        Objects.requireNonNull(subCategory);
+        appendChange(new SubCategoryCreated(categoryId.value(), subCategory)).apply();
     }
 
     public void updateDocument(DocName docName, UserId userId, CategoryId categoryId, LogHistory logHistory,
