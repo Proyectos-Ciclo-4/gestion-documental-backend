@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CategoryComponent } from './pages/category/category.component';
-import { InicioComponent } from './pages/inicio/inicio.component';
 import { ListDocumentsComponent } from './pages/list-documents/list-documents.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MenuAdminComponent } from './pages/menu-admin/menu-admin.component';
@@ -13,9 +12,6 @@ import { ViewDocumentComponent } from './pages/view-document/view-document.compo
 const routes: Routes = [{
   path: '',
   component: LoginComponent
-}, {
-  path: 'menu-inicio',
-  component: InicioComponent
 },
 {
   path: 'menu-admin',

@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   formUserLogin!: FormGroup;
   disableLoginWithEmail = true;
   controlSesion: ControlSesion = new ControlSesion();
+  showModalNoUser = false;
 
   constructor(
     private router: Router,
@@ -36,24 +37,33 @@ export class LoginComponent implements OnInit {
   }
 
   loginWithGoogle() {
-    this.login$.login().then((data) => {
 
-      this.endpoint$.verifyUser({ email: data.user.email })
-        .subscribe(data => {
+    this.showModalNoUser = true;
 
-          if (data.response === 'ok') {
-            this.controlSesion.writeSesionUser(data);
-            this.router.navigate(['/menu-admin']);
+    //  this.login$.login().then((data) => {
 
-          } else this.noUserGenerate();
+    // this.endpoint$.verifyUser({ email: data.user.email })
+    //   .subscribe(data => {
 
-        });
-    });
+    //     if (data.response === 'ok') {
+    //       this.controlSesion.writeSesionUser(data);
+    //       this.router.navigate(['/menu-admin']);
+
+    //     } else this.noUserGenerate();
+
+    //   });
+    //   this.router.navigate(['/menu-admin']);
+
+    //   });
     return false;
   }
 
   noUserGenerate() {
 
+  }
+
+  hiddenModarNoUser() {
+    this.showModalNoUser = false;
   }
 
 }

@@ -37,11 +37,85 @@ input[type="number"] {
     border-radius: var(--border-radius_gen);
 }
 
-.btn_ok {
+.btn_ok,
+.btn_cancel {
     padding: 10px 15px;
     border-radius: var(--border-radius_gen);
     font-weight: bold;
+    text-transform: capitalize;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn_ok {
     background: var(--color-secondary);
     border: none;
     color: white;
+}
+
+.btn_ok:hover {
+    box-shadow: 0px 0px 6px var(--color-secondary);
+}
+
+.btn_cancel {
+    background: var(--color-gray-2);
+    color: gray;
+    border: 1px solid gray;
+}
+
+.btn_cancel:hover {
+    box-shadow: 0px 0px 6px gray;
+}
+
+/* Modal */
+
+.modal {
+    position: fixed;
+    top: 0;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal_body {
+    max-width: 60%;
+    max-height: 80%;
+    overflow-y: scroll;
+    background: white;
+    padding: 14px;
+    border-radius: var(--border-radius_gen);
+    text-align: center;
+
+    animation: swipe-up 0.4s linear 1;
+}
+
+@keyframes swipe-up {
+    0% {
+        transform: translateY(150%);
+    }
+
+    40% {
+        transform: translateY(-10%);
+    }
+
+    50% {
+        transform: translateY(0%);
+    }
+}
+
+.modal_body-title {
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.modal_body-msj {
+    text-align: start;
+}
+
+.modal_body-btn {
+    margin: 2px;
 }
