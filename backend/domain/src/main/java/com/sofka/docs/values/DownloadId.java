@@ -1,4 +1,4 @@
-package com.sofka.docs;
+package com.sofka.docs.values;
 
 import co.com.sofka.domain.generic.Identity;
 
