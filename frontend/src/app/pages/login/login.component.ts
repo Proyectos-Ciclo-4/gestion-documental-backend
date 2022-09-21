@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
     //       this.controlSesion.writeSesionUser(data);
     //       this.router.navigate(['/menu-admin']);
 
-    //     } else this.noUserGenerate();
+    //     } else this.showModalNoUser = true;
 
     //   });
     //   this.router.navigate(['/menu-admin']);
