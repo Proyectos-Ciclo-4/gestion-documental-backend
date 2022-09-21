@@ -13,6 +13,7 @@ import { EndpointsService } from './services/endpoints/endpoints.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CategoryComponent } from './pages/category/category.component';
 import { SubCategoryComponent } from './pages/sub-category/sub-category.component';
+import { InicioComponent } from './pages/inicio/inicio.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SubCategoryComponent } from './pages/sub-category/sub-category.componen
     NavbarComponent,
     FooterComponent,
     CategoryComponent,
-    SubCategoryComponent
+    SubCategoryComponent,
+    InicioComponent
   ],
   imports: [
     ReactiveFormsModule,
