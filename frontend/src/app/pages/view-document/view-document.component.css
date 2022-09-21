@@ -7,7 +7,7 @@
     height: 50px;
 } */
 
-.titulo{
+.titulo {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -18,55 +18,54 @@
     margin: 0% !important;
     padding: 0% !important;
     height: 50px;
-    
+
 }
 
-.formulario{
+.formulario {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-bottom: 10px;
 }
-.elemento{
+
+.elemento {
     margin-top: 10px;
     display: flex;
     justify-content: space-between;
 }
 
-.boton{
+.boton {
     margin-top: 15px;
 }
 
-.documentos{
+.documentos {
     display: flex;
     align-items: center;
 }
 
 
-.lista{
+.lista {
     margin-top: 10px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
 
-.elemento-lista{
+.elemento-lista {
     display: flex;
     flex-direction: row;
     align-items: center;
     width: 200px;
 }
 
-.tabla{
+.tabla {
     display: flex;
     justify-content: center;
 }
 
-.paginacion{
+.paginacion {
     margin-top: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
-
