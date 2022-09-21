@@ -11,12 +11,16 @@ import { environment } from '../environments/environment';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { EndpointsService } from './services/endpoints/endpoints.service';
 import { HttpClientModule } from '@angular/common/http';
+import { CategoryComponent } from './pages/category/category.component';
+import { SubCategoryComponent } from './pages/sub-category/sub-category.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    CategoryComponent,
+    SubCategoryComponent
   ],
   imports: [
     ReactiveFormsModule,

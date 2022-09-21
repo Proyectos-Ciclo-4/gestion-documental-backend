@@ -6,7 +6,6 @@ import { SubCategoryComponent } from './sub-category.component';
 
 @NgModule({
   declarations: [
-    SubCategoryComponent
   ],
   imports: [
     CommonModule
