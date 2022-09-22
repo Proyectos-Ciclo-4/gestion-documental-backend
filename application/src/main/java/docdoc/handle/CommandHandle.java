@@ -1,4 +1,4 @@
-package handle;
+package docdoc.handle;
 
 
 import com.sofka.docs.commands.CreateDocumentCommand;
