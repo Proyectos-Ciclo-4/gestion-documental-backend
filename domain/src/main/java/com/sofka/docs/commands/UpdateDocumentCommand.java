@@ -14,20 +14,6 @@ public class UpdateDocumentCommand {
     private String blockChainId;
     private String description;
 
-    public UpdateDocumentCommand(String documentName ,String documentId, String userId, String categoryId, String logHistory,
-                                 LocalDate createdDate, Integer version, String pathDocument,
-                                 String blockChainId, String description) {
-        this.documentName = documentName;
-        this.documentId = documentId;
-        this.userId = userId;
-        this.categoryId = categoryId;
-        this.logHistory = logHistory;
-        this.createdDate = createdDate;
-        this.version = version;
-        this.pathDocument = pathDocument;
-        this.blockChainId = blockChainId;
-        this.description = description;
-    }
 
     public String getDocumentName() {
         return documentName;

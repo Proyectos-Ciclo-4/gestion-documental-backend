@@ -12,6 +12,6 @@ public class VersionDocument implements ValueObject<Integer> {
 
     @Override
     public Integer value(){
-        return value();
+        return version;
     }
 }

@@ -15,19 +15,7 @@ public class DeleteDocumentCommant extends Command {
     private String blockChainId;
     private String description;
 
-    public DeleteDocumentCommant(String documentId, String userId, String categoryId, String logHistory,
-                                 LocalDate createdDate, Integer version, String pathDocument,
-                                 String blockChainId, String description) {
-        this.documentId = documentId;
-        this.userId = userId;
-        this.categoryId = categoryId;
-        this.logHistory = logHistory;
-        this.createdDate = createdDate;
-        this.version = version;
-        this.pathDocument = pathDocument;
-        this.blockChainId = blockChainId;
 
-    }
 
     public String getDocumentId() {
         return documentId;

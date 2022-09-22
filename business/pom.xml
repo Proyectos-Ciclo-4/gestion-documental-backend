@@ -39,6 +39,12 @@
             <artifactId>junit-jupiter-api</artifactId>
             <version>5.8.2</version>
         </dependency>
+        <dependency>
+            <groupId>com.sofka.docdoc</groupId>
+            <artifactId>domain</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <properties>

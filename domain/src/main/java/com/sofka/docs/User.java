@@ -9,7 +9,16 @@ public class User extends AggregateEvent<UserId> {
     protected String name;
     protected String email;
     protected Integer userType;
-    protected
+
+    /**
+     * Instantiates a new Aggregate event.
+     *
+     * @param entityId the entity id
+     */
+    public User(UserId entityId) {
+        super(entityId);
+    }
+    //protected
 
 }
 */
