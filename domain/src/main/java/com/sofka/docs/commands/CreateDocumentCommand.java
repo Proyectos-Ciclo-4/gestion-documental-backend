@@ -27,7 +27,7 @@ public class CreateDocumentCommand extends Command {
     private String blockChainId;
     private String description;
 
-    public CreateDocumentCommand(String documentId, String userId, String categoryId, String logHistory,
+    /*public CreateDocumentCommand(String documentId, String userId, String categoryId, String logHistory,
                                  LocalDate createdDate, Integer version, String pathDocument,
                                  String blockChainId, String description) {
         this.documentId = documentId;
@@ -39,7 +39,7 @@ public class CreateDocumentCommand extends Command {
         this.pathDocument = pathDocument;
         this.blockChainId = blockChainId;
         this.description = description;
-    }
+    }*/
 
     public String getDocumentId() {
         return documentId;

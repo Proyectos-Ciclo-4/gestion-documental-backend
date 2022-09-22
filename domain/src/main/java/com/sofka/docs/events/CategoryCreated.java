@@ -1,27 +1,29 @@
 package com.sofka.docs.events;
 
 import co.com.sofka.domain.generic.DomainEvent;
+import com.sofka.docs.values.CategoryId;
+import com.sofka.docs.values.CategoryName;
 
 public class CategoryCreated extends DomainEvent {
-    private String id;
-    private String categoryName;
+    private CategoryId id;
+    private CategoryName categoryName;
 
     public CategoryCreated(){
         super("sofka.docs.categorycreated");
     }
 
-    public CategoryCreated(String id,String categoryName){
+    public CategoryCreated(CategoryId id,CategoryName categoryName){
         super("sofka.docs.categorycreated");
         this.id = id;
         this.categoryName = categoryName;
     }
 
-    public String getId() {
+
+    public CategoryId getId() {
         return id;
     }
 
-    public String getCategoryName(){
+    public CategoryName getCategoryName() {
         return categoryName;
     }
-
 }

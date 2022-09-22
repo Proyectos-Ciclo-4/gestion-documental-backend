@@ -7,6 +7,9 @@ public class SubcategoryId extends Identity {
         super(uuid);
     }
 
+    public SubcategoryId() {
+    }
+
     public static SubcategoryId of(String uuid) {return new SubcategoryId(uuid);}
 
 

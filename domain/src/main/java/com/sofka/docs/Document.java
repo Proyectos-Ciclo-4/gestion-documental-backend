@@ -5,6 +5,7 @@ import co.com.sofka.domain.generic.DomainEvent;
 import com.sofka.docs.events.CategoryCreated;
 import com.sofka.docs.events.DocumentCreated;
 import com.sofka.docs.events.DocumentUpdated;
+import com.sofka.docs.events.LogHistoryAdded;
 import com.sofka.docs.events.SubCategoryCreated;
 import com.sofka.docs.values.BlockChainId;
 import com.sofka.docs.values.CategoryId;
@@ -13,13 +14,17 @@ import com.sofka.docs.values.CreatedDate;
 import com.sofka.docs.values.Descriptiondoc;
 import com.sofka.docs.values.DocName;
 import com.sofka.docs.values.DocumentId;
+import com.sofka.docs.values.LogHistoryId;
 import com.sofka.docs.values.PathDocument;
+import com.sofka.docs.values.SubcategoryId;
+import com.sofka.docs.values.SubcategoryName;
 import com.sofka.docs.values.UserId;
 import com.sofka.docs.values.VersionDocument;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 public class Document extends AggregateEvent<DocumentId> {
     protected Map<DocumentId, UserId> downloads;
@@ -27,7 +32,7 @@ public class Document extends AggregateEvent<DocumentId> {
     protected SubCategory subCategory;
     protected CategoryDoc category;
 
-    protected LogHistory logHistory;
+    protected Set<LogHistory> logsHistory;
     protected CreatedDate createdDate;
 
     protected VersionDocument version;
@@ -36,13 +41,15 @@ public class Document extends AggregateEvent<DocumentId> {
     protected Descriptiondoc description;
 
 
-    public Document(DocumentId entityId, LogHistory logHistory,
-                           CreatedDate createdDate, VersionDocument version, PathDocument pathDocument,
-                           BlockChainId blockChainId, Descriptiondoc description) {
+    public Document(DocumentId entityId,
+                    LogHistoryId logHistoryId,
+                    LogHistoryFactory logHistoryFactory) {
         super(entityId);
-        subscribe(new DocumentChange(this));
-        appendChange(new DocumentCreated(category.identity(),logHistory.toString(), createdDate.value(), version.value(),
-                pathDocument.value(), blockChainId.value())).apply();
+        appendChange(new DocumentCreated(logHistoryId)).apply();
+        logHistoryFactory.getLogsHistory().forEach(logHistory -> {
+            appendChange( new LogHistoryAdded(logHistory.identity()));
+        });
+        subscribe(new DocumentEventChange(this));
     }
 
     /**
@@ -52,26 +59,29 @@ public class Document extends AggregateEvent<DocumentId> {
      */
     public Document(DocumentId entityId) {
         super(entityId);
-        subscribe(new DocumentChange(this));
+        subscribe(new DocumentEventChange(this));
     }
 
     public static Document from(DocumentId id, List<DomainEvent> events){
-        Document document = new Document(id);
-        events.forEach(event -> document.applyEvent(event));
+        var document = new Document(id);
+        events.forEach(document::applyEvent);
         return document;
     }
 
-    public void createCategory(CategoryId categoryId, CategoryName categoryName){
-        Objects.requireNonNull(categoryId);
+    public void createCategory(CategoryName categoryName){
+        var categoryId = new CategoryId();
         Objects.requireNonNull(categoryName);
-        appendChange(new CategoryCreated(categoryId.value(), categoryName.value())).apply();
+        appendChange(new CategoryCreated(categoryId, categoryName)).apply();
     }
 
-    public void createSubCategory(CategoryId categoryId, SubCategory subCategory){
+    public void createSubCategory(CategoryId categoryId, SubcategoryName subCategoryName){
         Objects.requireNonNull(categoryId);
-        Objects.requireNonNull(subCategory);
-        appendChange(new SubCategoryCreated(categoryId.value(), subCategory)).apply();
+        var subCategoryId= new SubcategoryId();
+        Objects.requireNonNull(subCategoryName);
+        appendChange(new SubCategoryCreated(categoryId, subCategoryId,subCategoryName)).apply();
     }
+
+
 
     public void updateDocument(DocName docName, UserId userId, CategoryId categoryId, LogHistory logHistory,
                                CreatedDate createdDate, VersionDocument version,

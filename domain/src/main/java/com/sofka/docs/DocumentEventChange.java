@@ -13,9 +13,9 @@ import com.sofka.docs.values.SubcategoryId;
 import com.sofka.docs.values.SubcategoryName;
 import com.sofka.docs.values.VersionDocument;
 
-public class DocumentChange extends EventChange {
+public class DocumentEventChange extends EventChange {
 
-    public DocumentChange(Document document) {
+    public DocumentEventChange(Document document) {
         apply((DocumentCreated event) -> {
             document.description=event.getDescription();
             document.name=event.getDocName();

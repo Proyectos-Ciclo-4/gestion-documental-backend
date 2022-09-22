@@ -10,10 +10,6 @@ public class CreateCategoryCommand extends Command {
 
     private Set<String> subcategories;
 
-    public CreateCategoryCommand(String categoryId, String categoryName) {
-        this.categoryId = categoryId;
-        this.categoryName = categoryName;
-    }
 
     public String getCategoryId() {
         return categoryId;

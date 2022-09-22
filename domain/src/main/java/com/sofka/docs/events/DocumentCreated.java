@@ -6,6 +6,7 @@ import com.sofka.docs.values.CategoryId;
 import com.sofka.docs.values.Descriptiondoc;
 import com.sofka.docs.values.DocName;
 import com.sofka.docs.values.DocumentId;
+import com.sofka.docs.values.LogHistoryId;
 import com.sofka.docs.values.UserId;
 
 import java.time.LocalDate;
@@ -15,6 +16,7 @@ public class DocumentCreated extends DomainEvent {
 
     //private String userId;
   //  private Map<DocumentId, UserId> downloads;
+    private LogHistoryId logHistoryId;
     private CategoryId categoryId;
     private CategoryDoc category;
     private String logHistory;
@@ -29,8 +31,9 @@ public class DocumentCreated extends DomainEvent {
         return docName;
     }
 
-    public DocumentCreated(){
+    public DocumentCreated(LogHistoryId logHistoryId){
         super("sofka.docs.documentcreated");
+        this.logHistoryId=logHistoryId;
     }
 
     public DocumentCreated(String type, CategoryDoc category, String logHistory, LocalDate createdDate, Integer version, String pathDocument, String blockChainId, Descriptiondoc description, DocName docName) {
@@ -56,6 +59,10 @@ public class DocumentCreated extends DomainEvent {
         this.version = version;
         this.pathDocument = pathDocument;
         this.blockChainId = blockChainId;
+    }
+
+    public LogHistoryId getLogHistoryId() {
+        return logHistoryId;
     }
 
     public CategoryDoc getCategory() {

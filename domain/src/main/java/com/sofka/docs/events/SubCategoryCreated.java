@@ -2,29 +2,34 @@ package com.sofka.docs.events;
 
 import co.com.sofka.domain.generic.DomainEvent;
 import com.sofka.docs.SubCategory;
+import com.sofka.docs.values.CategoryId;
+import com.sofka.docs.values.SubcategoryId;
+import com.sofka.docs.values.SubcategoryName;
 
 public class SubCategoryCreated extends DomainEvent {
-    private String categoryId;
+    private CategoryId categoryId;
    //private String subcategoryId;
-    private SubCategory subCategory;
+    private SubcategoryId subCategoryId;
+    private SubcategoryName subcategoryName;
 
-    public SubCategoryCreated(){
-        super("sofka.docs.subcategorycreated");
-    }
 
-    public SubCategoryCreated(String categoryId,SubCategory subcategory){
+
+    public SubCategoryCreated(CategoryId categoryId,SubcategoryId subcategoryId, SubcategoryName subcategoryName){
         super("sofka.docs.subcategorycreated");
         this.categoryId = categoryId;
-        //this.subcategoryId = subcategoryId;
-        this.subCategory = subcategory;
+        this.subCategoryId = subcategoryId;
+        this.subcategoryName = subcategoryName;
     }
 
-    public String getCategoryId() {
+    public CategoryId getCategoryId() {
         return categoryId;
     }
 
-    public SubCategory getSubCategory(){
-        return subCategory;
+    public SubcategoryId getSubCategoryId() {
+        return subCategoryId;
     }
 
+    public SubcategoryName getSubcategoryName() {
+        return subcategoryName;
+    }
 }
