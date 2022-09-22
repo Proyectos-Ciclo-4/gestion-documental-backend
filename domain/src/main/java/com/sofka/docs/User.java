@@ -1,4 +1,4 @@
-/*package com.sofka.docs;
+package com.sofka.docs;
 
 import co.com.sofka.domain.generic.AggregateEvent;
 import com.sofka.docs.values.UserId;
@@ -21,4 +21,3 @@ public class User extends AggregateEvent<UserId> {
     //protected
 
 }
-*/
