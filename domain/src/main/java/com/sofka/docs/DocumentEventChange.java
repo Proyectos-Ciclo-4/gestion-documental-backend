@@ -19,18 +19,19 @@ public class DocumentEventChange extends EventChange {
         apply((DocumentCreated event) -> {
             document.description=event.getDescription();
             document.name=event.getDocName();
-            document.pathDocument= new PathDocument(event.getPathDocument());
-            document.category=new CategoryDoc(event.getCategory().identity(),event.getCategory().categoryName());
-            document.createdDate=new CreatedDate(event.getCreatedDate());
+            document.pathDocument= event.getPathDocument();
+            //document.category=new CategoryDoc(event.getCategory().identity(),event.getCategory().categoryName());
+            //document.createdDate=new CreatedDate(event.getCreatedDate());
             document.version=new VersionDocument(event.getVersion());
-            document.blockChainId=new BlockChainId(event.getBlockChainId());
+            document.blockChainId=event.getBlockChainId();
         });
         apply((CategoryCreated event) -> {
-            document.category= new CategoryDoc(new CategoryId(event.getId()),new CategoryName(event.getCategoryName()));
+            document.category= new CategoryDoc(new CategoryId(event.getId().value()),new CategoryName(event.getCategoryName().value()));
         });
+        /*
         apply((SubCategoryCreated event) -> {
             document.subCategory= new SubCategory(new SubcategoryId(event.getSubCategory().identity().value()),new SubcategoryName(event.getSubCategory().getName().value()),new CategoryId(event.getCategoryId()));
-        });
+        });*/
 
 
 

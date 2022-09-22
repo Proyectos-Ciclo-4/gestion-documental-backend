@@ -40,8 +40,14 @@ public class Document extends AggregateEvent<DocumentId> {
     protected BlockChainId blockChainId;
     protected Descriptiondoc description;
 
+    public Document(DocumentId entityId, DocName name, CategoryId categoryId, VersionDocument version, PathDocument pathDocument, BlockChainId blockChainId, Descriptiondoc description) {
+        super(entityId);
+        subscribe(new DocumentEventChange(this));
+        appendChange(new DocumentCreated(categoryId,version.value(), pathDocument, blockChainId, description,name)).apply();
 
-    public Document(DocumentId entityId,
+    }
+
+/*public Document(DocumentId entityId,
                     LogHistoryId logHistoryId,
                     LogHistoryFactory logHistoryFactory) {
         super(entityId);
@@ -50,7 +56,7 @@ public class Document extends AggregateEvent<DocumentId> {
             appendChange( new LogHistoryAdded(logHistory.identity()));
         });
         subscribe(new DocumentEventChange(this));
-    }
+    }*/
 
     /**
      * Instantiates a new Aggregate event.
