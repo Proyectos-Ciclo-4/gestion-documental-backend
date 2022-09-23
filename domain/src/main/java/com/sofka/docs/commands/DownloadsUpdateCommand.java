@@ -12,12 +12,6 @@ public class DownloadsUpdateCommand extends Command {
 
     private Integer numberDownloads;
 
-    public DownloadsUpdateCommand(String downloadId, String documentId, String userId, Integer numberDownloads) {
-        this.DownloadId = downloadId;
-        this.DocumentId = documentId;
-        this.UserId = userId;
-        this.numberDownloads = numberDownloads;
-    }
 
     public void setUserId(String userId) {
         this.UserId = userId;

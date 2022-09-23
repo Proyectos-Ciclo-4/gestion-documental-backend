@@ -33,8 +33,8 @@ class CreateCategoryUseCaseTest {
         StepVerifier.create(useCase.apply(Mono.just(command)))
                 .expectNextMatches(domainEvent -> {
                     var event = (CategoryCreated) domainEvent;
-                    assertEquals("Graduacion", event.getCategoryName());
-                    return "Graduacion".equals(event.getCategoryName());
+                    assertEquals("Graduacion", event.getCategoryName().value());
+                    return "Graduacion".equals(event.getCategoryName().value());
                 })
                 .expectComplete()
                 .verify();

@@ -8,7 +8,6 @@ public class CreateCategoryCommand extends Command {
     private String categoryId;
     private String categoryName;
     private Set<String> subcategories;
-
     private String userId;
 
     public void setUserId(String userId) {
@@ -18,6 +17,7 @@ public class CreateCategoryCommand extends Command {
     public String getUserId() {
         return userId;
     }
+
 
     public String getCategoryId() {
         return categoryId;

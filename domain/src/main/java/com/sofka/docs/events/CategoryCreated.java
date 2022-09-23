@@ -15,6 +15,7 @@ public class CategoryCreated extends DomainEvent {
     }
 
     public CategoryCreated(UserId userId, CategoryId categoryId, CategoryName categoryName) {
+
         super("sofka.docs.categorycreated");
         this.categoryId = categoryId;
         this.categoryName = categoryName;
@@ -31,5 +32,4 @@ public class CategoryCreated extends DomainEvent {
     public CategoryName getCategoryName() {
         return categoryName;
     }
-
 }

@@ -2,32 +2,23 @@ package com.sofka.docs.commands;
 
 import co.com.sofka.domain.generic.Command;
 
-import java.time.LocalDate;
-
 public class CreateDocumentCommand extends Command {
 
     private String documentId;
     private String userId;
     private String categoryId;
-    private String logHistory;
-    private LocalDate createdDate;
-    private Integer version;
+     private Integer version;
     private String pathDocument;
     private String blockChainId;
     private String description;
+    private String name;
 
-    public CreateDocumentCommand(String documentId, String userId, String categoryId, String logHistory,
-                                 LocalDate createdDate, Integer version, String pathDocument,
-                                 String blockChainId, String description) {
-        this.documentId = documentId;
-        this.userId = userId;
-        this.categoryId = categoryId;
-        this.logHistory = logHistory;
-        this.createdDate = createdDate;
-        this.version = version;
-        this.pathDocument = pathDocument;
-        this.blockChainId = blockChainId;
-        this.description = description;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDocumentId() {
@@ -39,14 +30,6 @@ public class CreateDocumentCommand extends Command {
     }
     public String getCategoryId() {
         return categoryId;
-    }
-
-    public String getLogHistory() {
-        return logHistory;
-    }
-
-    public LocalDate getCreatedDate() {
-        return createdDate;
     }
 
     public Integer getVersion() {
@@ -63,5 +46,33 @@ public class CreateDocumentCommand extends Command {
 
     public String getDescription() {
         return description;
+    }
+
+    public void setDocumentId(String documentId) {
+        this.documentId = documentId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
+    }
+
+        public void setVersion(Integer version) {
+        this.version = version;
+    }
+
+    public void setPathDocument(String pathDocument) {
+        this.pathDocument = pathDocument;
+    }
+
+    public void setBlockChainId(String blockChainId) {
+        this.blockChainId = blockChainId;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

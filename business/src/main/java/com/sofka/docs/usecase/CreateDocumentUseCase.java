@@ -1,6 +1,38 @@
 package com.sofka.docs.usecase;
 
+import co.com.sofka.domain.generic.DomainEvent;
+import com.sofka.docs.Document;
+import com.sofka.docs.commands.CreateDocumentCommand;
+import com.sofka.docs.gateway.DocumentDomainEventRepository;
+import com.sofka.docs.values.BlockChainId;
+import com.sofka.docs.values.CategoryId;
+import com.sofka.docs.values.Descriptiondoc;
+import com.sofka.docs.values.DocName;
+import com.sofka.docs.values.DocumentId;
+import com.sofka.docs.values.PathDocument;
+import com.sofka.docs.values.VersionDocument;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
-public class CreateDocumentUseCase {
+public class CreateDocumentUseCase extends UseCaseForCommand<CreateDocumentCommand> {
+    private final DocumentDomainEventRepository repository;
 
+    public CreateDocumentUseCase(DocumentDomainEventRepository repository) {
+        this.repository = repository;
+    }
+
+    @Override
+    public Flux<DomainEvent> apply(Mono<CreateDocumentCommand> crearDocumentcommand) {
+        return crearDocumentcommand.flatMapIterable(command -> {
+            var document = new Document(DocumentId.of(command.getDocumentId()),
+                    new DocName(command.getName()),
+                    new CategoryId(command.getCategoryId()),
+                    new VersionDocument(command.getVersion()),
+                    new PathDocument(command.getPathDocument()),
+                    new BlockChainId(command.getBlockChainId()),
+                    new Descriptiondoc(command.getDescription()));
+
+            return document.getUncommittedChanges();
+        });
+    }
 }

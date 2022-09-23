@@ -26,6 +26,4 @@ public class User extends AggregateEvent<UserId> {
         events.forEach(user::applyEvent);
         return user;
     }
-
-
 }
