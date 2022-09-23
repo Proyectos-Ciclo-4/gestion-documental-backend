@@ -22,6 +22,7 @@ public class CommandHandle {
     public CommandHandle(ReactiveMongoTemplate template) {
         this.template = template;
     }
+
     @Bean
     public RouterFunction<ServerResponse> createDocument(CreateDocumentUseCase useCase) {
         return route(
