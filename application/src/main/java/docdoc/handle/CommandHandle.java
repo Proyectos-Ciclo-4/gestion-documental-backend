@@ -3,6 +3,8 @@ package docdoc.handle;
 
 import com.sofka.docs.commands.CreateCategoryCommand;
 import com.sofka.docs.commands.CreateDocumentCommand;
+import com.sofka.docs.commands.CreateSubCategoryCommand;
+import com.sofka.docs.usecase.AddSubcategoryUseCase;
 import com.sofka.docs.usecase.CreateCategoryUseCase;
 import com.sofka.docs.usecase.CreateDocumentUseCase;
 import org.springframework.context.annotation.Bean;
@@ -42,10 +44,10 @@ public class CommandHandle {
         );
     }
     @Bean
-    public RouterFunction<ServerResponse> createSubCategory(CreateCategoryUseCase useCase) {
+    public RouterFunction<ServerResponse> createSubCategory(AddSubcategoryUseCase useCase) {
         return route(
-                POST("/category/create").and(accept(MediaType.APPLICATION_JSON)),
-                request -> template.save(request.bodyToMono(CreateCategoryCommand.class), "categories")
+                POST("/subcategory/create").and(accept(MediaType.APPLICATION_JSON)),
+                request -> template.save(request.bodyToMono(CreateSubCategoryCommand.class), "subcategories")
                         .then(ServerResponse.ok().build())
         );
     }
