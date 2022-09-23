@@ -17,10 +17,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class UserVerifyUseCaseTest {
+class CrateUserUseCaseTest {
 
     @InjectMocks
-    private UserVerifyUseCase useCase;
+    private CreateUserUseCase useCase;
     @Mock
     private DomainEventsRepository repository;
 
