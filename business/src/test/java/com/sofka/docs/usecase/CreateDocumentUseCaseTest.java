@@ -28,7 +28,7 @@ public class CreateDocumentUseCaseTest {
     private CreateDocumentUseCase useCase;
 
     @Test
-    void crearDocument(){
+    void crearDocument() {
         var command = new CreateDocumentCommand();
         command.setDocumentId("xxx");
         command.setDescription("test descriptiondoc");
@@ -39,25 +39,14 @@ public class CreateDocumentUseCaseTest {
         command.setVersion(1);
         command.setBlockChainId("blockChainId");
 
-        //command.setCreatedDate(new LocalDate(1980,1,1));
-        //command.setCategoryId("cat1");
-        //when(repository.getEventsBy("xxx")).thenReturn(history());
-
         StepVerifier.create(useCase.apply(Mono.just(command)))
                 .expectNextMatches(
                         domainEvent -> {
                             var event = (DocumentCreated) domainEvent;
                             return event.getDescription().value().equals("test descriptiondoc");
-                            //return  event.getJugadorPrincipal().value().equals("XXX") && event.aggregateRootId().equals("AAAA");
                         }
                 ).expectComplete()
                 .verify();
 
     }
-    /*private Flux<DomainEvent> history() {
-        var event = new DocumentCreated(LogHistoryId.of("xxx"));
-        event.setAggregateRootId("xxx");
-        return Flux.just(event);
-    }*/
-
 }
