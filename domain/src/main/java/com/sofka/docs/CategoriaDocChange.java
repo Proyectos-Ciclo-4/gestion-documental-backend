@@ -7,6 +7,8 @@ import com.sofka.docs.values.CategoryId;
 import com.sofka.docs.values.CategoryName;
 import com.sofka.docs.values.SubCategory;
 
+import java.util.HashSet;
+
 public class CategoriaDocChange extends EventChange {
 
     public CategoriaDocChange(CategoryDoc categoryDoc) {
@@ -15,7 +17,8 @@ public class CategoriaDocChange extends EventChange {
             categoryDoc.categoryName = event.getCategoryName();
         });
         apply((SubCategoryCreated event) -> {
-            categoryDoc.addSubCategory((event.getSubcategories()));
+            categoryDoc.subCategory=new HashSet<>();
+            categoryDoc.subCategory.add(event.getSubcategories());
         });
     }
 }
