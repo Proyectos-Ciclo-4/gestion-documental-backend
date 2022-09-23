@@ -1,23 +1,12 @@
-package com.sofka.docs.commands;
-
-import co.com.sofka.domain.generic.Command;
+package docdoc.handle.model;
 
 import java.util.Set;
 
-public class CreateCategoryCommand extends Command {
+public class CategoryModel {
     private String categoryId;
     private String categoryName;
     private Set<String> subcategories;
     private String userId;
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
 
     public String getCategoryId() {
         return categoryId;
@@ -41,5 +30,13 @@ public class CreateCategoryCommand extends Command {
 
     public void setSubcategories(Set<String> subcategories) {
         this.subcategories = subcategories;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

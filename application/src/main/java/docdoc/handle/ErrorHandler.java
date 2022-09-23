@@ -13,7 +13,8 @@ import java.util.function.BiFunction;
 class ErrorHandler {
 
 
-    private static final  BiFunction<HttpStatus,String, Mono<ServerResponse>> response =
+
+    private static final BiFunction<HttpStatus,String, Mono<ServerResponse>> response =
             (status,value)-> ServerResponse.status(status).body(Mono.just(new ErrorResponse(value)),
                     ErrorResponse.class);
 

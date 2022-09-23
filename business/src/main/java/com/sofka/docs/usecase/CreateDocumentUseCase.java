@@ -6,7 +6,6 @@ import com.sofka.docs.commands.CreateDocumentCommand;
 import com.sofka.docs.gateway.DocumentDomainEventRepository;
 import com.sofka.docs.values.BlockChainId;
 import com.sofka.docs.values.CategoryId;
-import com.sofka.docs.values.CategoryName;
 import com.sofka.docs.values.Descriptiondoc;
 import com.sofka.docs.values.DocName;
 import com.sofka.docs.values.DocumentId;
@@ -24,8 +23,7 @@ public class CreateDocumentUseCase extends UseCaseForCommand<CreateDocumentComma
 
     @Override
     public Flux<DomainEvent> apply(Mono<CreateDocumentCommand> crearDocumentcommand) {
-        return crearDocumentcommand.flatMapIterable(command->{
-            //var factory= new LogHistoryFactory();
+        return crearDocumentcommand.flatMapIterable(command -> {
             var document = new Document(DocumentId.of(command.getDocumentId()),
                     new DocName(command.getName()),
                     new CategoryId(command.getCategoryId()),
@@ -33,8 +31,7 @@ public class CreateDocumentUseCase extends UseCaseForCommand<CreateDocumentComma
                     new PathDocument(command.getPathDocument()),
                     new BlockChainId(command.getBlockChainId()),
                     new Descriptiondoc(command.getDescription()));
-            //document.createCategory(new CategoryName("NewCategory"));
-            //document.createSubCategory();
+
             return document.getUncommittedChanges();
         });
     }

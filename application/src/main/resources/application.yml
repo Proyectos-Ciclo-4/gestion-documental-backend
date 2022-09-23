@@ -1,5 +1,8 @@
 spring:
   application:
     name: service
+  data:
+    mongodb:
+      database: gestion_doc
 server:
   port: 8080

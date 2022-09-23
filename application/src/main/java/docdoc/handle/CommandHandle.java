@@ -1,7 +1,9 @@
 package docdoc.handle;
 
 
+import com.sofka.docs.commands.CreateCategoryCommand;
 import com.sofka.docs.commands.CreateDocumentCommand;
+import com.sofka.docs.usecase.CreateCategoryUseCase;
 import com.sofka.docs.usecase.CreateDocumentUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,11 +24,28 @@ public class CommandHandle {
     public CommandHandle(ReactiveMongoTemplate template) {
         this.template = template;
     }
+
     @Bean
     public RouterFunction<ServerResponse> createDocument(CreateDocumentUseCase useCase) {
         return route(
                 POST("/document/create").and(accept(MediaType.APPLICATION_JSON)),
                 request -> template.save(request.bodyToMono(CreateDocumentCommand.class), "documents")
+                        .then(ServerResponse.ok().build())
+        );
+    }
+    @Bean
+    public RouterFunction<ServerResponse> createCategory(CreateCategoryUseCase useCase) {
+        return route(
+                POST("/category/create").and(accept(MediaType.APPLICATION_JSON)),
+                request -> template.save(request.bodyToMono(CreateCategoryCommand.class), "categories")
+                        .then(ServerResponse.ok().build())
+        );
+    }
+    @Bean
+    public RouterFunction<ServerResponse> createSubCategory(CreateCategoryUseCase useCase) {
+        return route(
+                POST("/category/create").and(accept(MediaType.APPLICATION_JSON)),
+                request -> template.save(request.bodyToMono(CreateCategoryCommand.class), "categories")
                         .then(ServerResponse.ok().build())
         );
     }

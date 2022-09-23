@@ -9,8 +9,6 @@ public class SubcategoryId extends Identity {
 
     public SubcategoryId() {
     }
-
     public static SubcategoryId of(String uuid) {return new SubcategoryId(uuid);}
-
 
 }

@@ -10,6 +10,5 @@ public class UserId extends Identity {
     public UserId(){
 
     }
-
     public static UserId of(String uuid) {return new UserId(uuid);}
 }

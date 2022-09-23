@@ -1,29 +1,13 @@
 package com.sofka.docs.commands;
 
 import co.com.sofka.domain.generic.Command;
-import com.sofka.docs.CategoryDoc;
-import com.sofka.docs.LogHistory;
-import com.sofka.docs.values.BlockChainId;
-import com.sofka.docs.values.CategoryId;
-import com.sofka.docs.values.CreatedDate;
-import com.sofka.docs.values.DocumentId;
-import com.sofka.docs.values.PathDocument;
-import com.sofka.docs.values.UpdatedDate;
-import com.sofka.docs.values.UserId;
-import com.sofka.docs.values.VersionDocument;
-
-import java.time.LocalDate;
-import java.util.Map;
-import java.util.Set;
 
 public class CreateDocumentCommand extends Command {
 
     private String documentId;
     private String userId;
     private String categoryId;
-    //private Set<String> logHistory;
-    //private LocalDate createdDate;
-    private Integer version;
+     private Integer version;
     private String pathDocument;
     private String blockChainId;
     private String description;
@@ -47,9 +31,6 @@ public class CreateDocumentCommand extends Command {
     public String getCategoryId() {
         return categoryId;
     }
-
-
-
 
     public Integer getVersion() {
         return version;
@@ -79,11 +60,7 @@ public class CreateDocumentCommand extends Command {
         this.categoryId = categoryId;
     }
 
-
-
-
-
-    public void setVersion(Integer version) {
+        public void setVersion(Integer version) {
         this.version = version;
     }
 
