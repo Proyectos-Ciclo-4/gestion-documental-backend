@@ -15,7 +15,7 @@ import java.util.Arrays;
 
 
 @Configuration
-@ComponentScan(value="docdoc",
+@ComponentScan(value="com.sofka.docs.usecase",
         useDefaultFilters = false, includeFilters = @ComponentScan.Filter
         (type = FilterType.REGEX, pattern = ".*UseCase")
 )

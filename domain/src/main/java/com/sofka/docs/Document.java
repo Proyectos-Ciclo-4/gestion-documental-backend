@@ -40,7 +40,12 @@ public class Document extends AggregateEvent<DocumentId> {
     protected BlockChainId blockChainId;
     protected Descriptiondoc description;
 
-    public Document(DocumentId entityId, DocName name, CategoryId categoryId, VersionDocument version, PathDocument pathDocument, BlockChainId blockChainId, Descriptiondoc description) {
+    public Document(DocumentId entityId,
+                    DocName name,
+                    CategoryId categoryId,
+                    VersionDocument version,
+                    PathDocument pathDocument,
+                    BlockChainId blockChainId, Descriptiondoc description) {
         super(entityId);
         subscribe(new DocumentEventChange(this));
         appendChange(new DocumentCreated(categoryId,version.value(), pathDocument, blockChainId, description,name)).apply();
