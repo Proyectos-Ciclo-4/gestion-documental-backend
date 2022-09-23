@@ -1,19 +1,8 @@
 package com.sofka.docs.commands;
 
 import co.com.sofka.domain.generic.Command;
-import com.sofka.docs.CategoryDoc;
-import com.sofka.docs.LogHistory;
-import com.sofka.docs.values.BlockChainId;
-import com.sofka.docs.values.CategoryId;
-import com.sofka.docs.values.CreatedDate;
-import com.sofka.docs.values.DocumentId;
-import com.sofka.docs.values.PathDocument;
-import com.sofka.docs.values.UpdatedDate;
-import com.sofka.docs.values.UserId;
-import com.sofka.docs.values.VersionDocument;
 
 import java.time.LocalDate;
-import java.util.Map;
 
 public class CreateDocumentCommand extends Command {
 

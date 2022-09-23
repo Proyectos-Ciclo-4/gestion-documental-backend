@@ -7,12 +7,16 @@ import java.util.Set;
 public class CreateCategoryCommand extends Command {
     private String categoryId;
     private String categoryName;
-
     private Set<String> subcategories;
 
-    public CreateCategoryCommand(String categoryId, String categoryName) {
-        this.categoryId = categoryId;
-        this.categoryName = categoryName;
+    private String userId;
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getUserId() {
+        return userId;
     }
 
     public String getCategoryId() {
