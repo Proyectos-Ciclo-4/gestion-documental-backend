@@ -10,21 +10,27 @@ import reactor.core.publisher.Mono;
 
 public class UserVerifyUseCase extends UseCaseForCommand<UserVerifyCommand> {
 
-    private final DomainEventsRepository repository;
+    //private final DomainEventsRepository repository;
 
-    public UserVerifyUseCase(DomainEventsRepository repository) {
-        this.repository = repository;
-    }
+    //public UserVerifyUseCase(DomainEventsRepository repository) {
+        //this.repository = repository;
+    //}
 
     @Override
     public Flux<DomainEvent> apply(Mono<UserVerifyCommand> userVerifyCommandMono) {
-        return userVerifyCommandMono.flatMapMany((command) -> repository
+        /*return userVerifyCommandMono.flatMapMany((command) -> repository
                 .obtenerEventosPor(command.getUserId())
                 .collectList()
                 .flatMapIterable(events -> {
                     var user = new User(UserId.of(command.getUserId()), command.getEmail());
                     return user.getUncommittedChanges();
-                }));
+                }));*/
+        return userVerifyCommandMono.flatMapIterable(command -> {
+            var user = new User(UserId.of(command.getUserId()), command.getEmail());
+            return user.getUncommittedChanges();
+        });
     }
+
+
 }
 
