@@ -2,11 +2,9 @@ package com.sofka.docs.usecase;
 
 import com.sofka.docs.commands.CreateCategoryCommand;
 import com.sofka.docs.events.CategoryCreated;
-import com.sofka.docs.usecase.gateway.model.DomainEventsRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;

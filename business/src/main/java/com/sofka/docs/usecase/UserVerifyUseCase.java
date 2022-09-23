@@ -3,7 +3,6 @@ package com.sofka.docs.usecase;
 import co.com.sofka.domain.generic.DomainEvent;
 import com.sofka.docs.User;
 import com.sofka.docs.commands.UserVerifyCommand;
-import com.sofka.docs.usecase.gateway.model.DomainEventsRepository;
 import com.sofka.docs.values.UserId;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

@@ -5,18 +5,14 @@ import co.com.sofka.domain.generic.DomainEvent;
 import com.sofka.docs.events.CategoryCreated;
 import com.sofka.docs.events.DocumentCreated;
 import com.sofka.docs.events.DocumentUpdated;
-import com.sofka.docs.events.LogHistoryAdded;
-import com.sofka.docs.events.SubCategoryCreated;
 import com.sofka.docs.values.BlockChainId;
 import com.sofka.docs.values.CategoryId;
 import com.sofka.docs.values.CategoryName;
 import com.sofka.docs.values.Descriptiondoc;
 import com.sofka.docs.values.DocName;
 import com.sofka.docs.values.DocumentId;
-import com.sofka.docs.values.LogHistoryId;
 import com.sofka.docs.values.PathDocument;
-import com.sofka.docs.values.SubcategoryId;
-import com.sofka.docs.values.SubcategoryName;
+import com.sofka.docs.values.SubCategory;
 import com.sofka.docs.values.UserId;
 import com.sofka.docs.values.VersionDocument;
 
@@ -24,7 +20,6 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 public class Document extends AggregateEvent<DocumentId> {
 
@@ -53,7 +48,8 @@ public class Document extends AggregateEvent<DocumentId> {
                     CategoryId categoryId,
                     VersionDocument version,
                     PathDocument pathDocument,
-                    BlockChainId blockChainId, Descriptiondoc description) {
+                    BlockChainId blockChainId,
+                    Descriptiondoc description) {
         super(entityId);
         subscribe(new DocumentEventChange(this));
         appendChange(new DocumentCreated(categoryId, version.value(), pathDocument, blockChainId, description, name)).apply();
@@ -83,13 +79,13 @@ public class Document extends AggregateEvent<DocumentId> {
     }
 
 
-        public void createSubCategory (CategoryId categoryId, SubcategoryName subCategoryName){
+        /*public void createSubCategory (CategoryId categoryId, SubcategoryName subCategoryName){
             Objects.requireNonNull(categoryId);
             var subCategoryId = new SubcategoryId();
             Objects.requireNonNull(subCategoryName);
             appendChange(new SubCategoryCreated(categoryId, subCategoryId, subCategoryName)).apply();
         }
-
+*/
 
         public void updateDocument (DocName docName, UserId userId, CategoryId categoryId, LogHistory
         logHistory,
