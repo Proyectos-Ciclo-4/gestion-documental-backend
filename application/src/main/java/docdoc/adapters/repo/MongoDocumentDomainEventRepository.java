@@ -16,11 +16,6 @@ public class MongoDocumentDomainEventRepository implements DocumentDomainEventRe
 
 
     @Override
-    public Flux<DomainEvent> obtenerEventosPor(String id) {
-        return null;
-    }
-
-    @Override
     public Flux<DomainEvent> getEventsBy(String id) {
         return repository.getEventsBy("id", id);
     }

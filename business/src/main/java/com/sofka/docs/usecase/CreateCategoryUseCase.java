@@ -3,7 +3,6 @@ package com.sofka.docs.usecase;
 import co.com.sofka.domain.generic.DomainEvent;
 import com.sofka.docs.CategoryDoc;
 import com.sofka.docs.commands.CreateCategoryCommand;
-import com.sofka.docs.usecase.gateway.model.DomainEventsRepository;
 import com.sofka.docs.values.CategoryId;
 import com.sofka.docs.values.CategoryName;
 import com.sofka.docs.values.UserId;

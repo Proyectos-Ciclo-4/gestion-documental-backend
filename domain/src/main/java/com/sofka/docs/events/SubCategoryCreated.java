@@ -1,35 +1,33 @@
 package com.sofka.docs.events;
 
 import co.com.sofka.domain.generic.DomainEvent;
-import com.sofka.docs.SubCategory;
 import com.sofka.docs.values.CategoryId;
+import com.sofka.docs.values.SubCategory;
 import com.sofka.docs.values.SubcategoryId;
 import com.sofka.docs.values.SubcategoryName;
 
+import java.util.Set;
+
 public class SubCategoryCreated extends DomainEvent {
-    private CategoryId categoryId;
-   //private String subcategoryId;
-    private SubcategoryId subCategoryId;
-    private SubcategoryName subcategoryName;
+    //private CategoryId categoryId;
+    private SubCategory subcategories;
 
 
 
-    public SubCategoryCreated(CategoryId categoryId,SubcategoryId subcategoryId, SubcategoryName subcategoryName){
+
+    public SubCategoryCreated(SubCategory subcategory){
         super("sofka.docs.subcategorycreated");
-        this.categoryId = categoryId;
-        this.subCategoryId = subcategoryId;
-        this.subcategoryName = subcategoryName;
+        this.subcategories=subcategory;
     }
 
-    public CategoryId getCategoryId() {
-        return categoryId;
+    public SubCategory getSubcategories() {
+        return subcategories;
     }
 
-    public SubcategoryId getSubCategoryId() {
-        return subCategoryId;
-    }
-
-    public SubcategoryName getSubcategoryName() {
-        return subcategoryName;
+    @Override
+    public String toString() {
+        return "SubCategoryCreated{" +
+                ", subcategories=" + subcategories +
+                '}';
     }
 }

@@ -3,7 +3,7 @@ package com.sofka.docs.usecase;
 import co.com.sofka.domain.generic.DomainEvent;
 import com.sofka.docs.commands.UserVerifyCommand;
 import com.sofka.docs.events.UserVerify;
-import com.sofka.docs.usecase.gateway.model.DomainEventsRepository;
+import com.sofka.docs.gateway.DomainEventsRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
