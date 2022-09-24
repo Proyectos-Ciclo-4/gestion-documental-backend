@@ -3,7 +3,7 @@ package docdoc.handle;
 import docdoc.handle.model.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.function.ServerRequest;
+import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
@@ -11,6 +11,7 @@ import java.util.function.BiFunction;
 
 @Component
 class ErrorHandler {
+
 
 
     private static final BiFunction<HttpStatus,String, Mono<ServerResponse>> response =
