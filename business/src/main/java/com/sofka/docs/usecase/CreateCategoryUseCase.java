@@ -5,9 +5,12 @@ import com.sofka.docs.CategoryDoc;
 import com.sofka.docs.commands.CreateCategoryCommand;
 import com.sofka.docs.values.CategoryId;
 import com.sofka.docs.values.CategoryName;
+import com.sofka.docs.values.SubCategory;
 import com.sofka.docs.values.UserId;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.HashSet;
 
 public class CreateCategoryUseCase extends UseCaseForCommand<CreateCategoryCommand> {
     @Override
@@ -18,6 +21,7 @@ public class CreateCategoryUseCase extends UseCaseForCommand<CreateCategoryComma
                     new CategoryId(command.getCategoryId()),
                     new CategoryName(command.getCategoryName())
             );
+            //category.addSubCategory(new SubCategory(""));
             return category.getUncommittedChanges();
         });
     }

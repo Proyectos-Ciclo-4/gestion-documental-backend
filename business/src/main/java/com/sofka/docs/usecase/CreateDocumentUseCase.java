@@ -10,6 +10,7 @@ import com.sofka.docs.values.Descriptiondoc;
 import com.sofka.docs.values.DocName;
 import com.sofka.docs.values.DocumentId;
 import com.sofka.docs.values.PathDocument;
+import com.sofka.docs.values.SubcategoryName;
 import com.sofka.docs.values.VersionDocument;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -30,8 +31,8 @@ public class CreateDocumentUseCase extends UseCaseForCommand<CreateDocumentComma
                     new VersionDocument(command.getVersion()),
                     new PathDocument(command.getPathDocument()),
                     new BlockChainId(command.getBlockChainId()),
-                    new Descriptiondoc(command.getDescription()));
-
+                    new Descriptiondoc(command.getDescription()),
+                    new SubcategoryName(command.getSubCategoryName()));
             return document.getUncommittedChanges();
         });
     }

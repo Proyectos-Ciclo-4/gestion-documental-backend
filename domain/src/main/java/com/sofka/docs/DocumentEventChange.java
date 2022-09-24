@@ -17,6 +17,7 @@ public class DocumentEventChange extends EventChange {
             document.createdDate = Instant.now();
             document.version = new VersionDocument(event.getVersion());
             document.blockChainId = event.getBlockChainId();
+            document.subCategoryName = event.getSubcategoryName();
         });
 
     }

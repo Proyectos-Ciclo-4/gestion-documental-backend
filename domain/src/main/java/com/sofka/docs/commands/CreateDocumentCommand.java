@@ -12,6 +12,15 @@ public class CreateDocumentCommand extends Command {
     private String blockChainId;
     private String description;
     private String name;
+    private String subCategoryName;
+
+    public String getSubCategoryName() {
+        return subCategoryName;
+    }
+
+    public void setSubCategoryName(String subCategoryName) {
+        this.subCategoryName = subCategoryName;
+    }
 
     public String getName() {
         return name;

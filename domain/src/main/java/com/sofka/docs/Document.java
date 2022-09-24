@@ -13,6 +13,7 @@ import com.sofka.docs.values.DocName;
 import com.sofka.docs.values.DocumentId;
 import com.sofka.docs.values.PathDocument;
 import com.sofka.docs.values.SubCategory;
+import com.sofka.docs.values.SubcategoryName;
 import com.sofka.docs.values.UserId;
 import com.sofka.docs.values.VersionDocument;
 
@@ -29,7 +30,7 @@ public class Document extends AggregateEvent<DocumentId> {
 
     protected UserId userId;
 
-    protected SubCategory subCategory;
+    protected SubcategoryName subCategoryName;
 
     protected CategoryId categoryId;
 
@@ -49,10 +50,10 @@ public class Document extends AggregateEvent<DocumentId> {
                     VersionDocument version,
                     PathDocument pathDocument,
                     BlockChainId blockChainId,
-                    Descriptiondoc description) {
+                    Descriptiondoc description,SubcategoryName subCategoryName) {
         super(entityId);
         subscribe(new DocumentEventChange(this));
-        appendChange(new DocumentCreated(categoryId, version.value(), pathDocument, blockChainId, description, name)).apply();
+        appendChange(new DocumentCreated(categoryId, version.value(), pathDocument, blockChainId, description, name,subCategoryName)).apply();
 
     }
 

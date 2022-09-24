@@ -1,6 +1,7 @@
 package docdoc.handle;
 
 import docdoc.handle.model.CategoryModel;
+import docdoc.handle.model.DocumentModel;
 import docdoc.handle.model.UserModel;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,16 +40,31 @@ public class QueryHandle {
     public RouterFunction<ServerResponse> getAllCategories() {
         return route(
                 GET("/category/getall"),
-                request -> template.findAll (CategoryModel.class, "categories")
+                request -> template.findAll(CategoryModel.class, "categories")
                         .collectList()
                         .flatMap(list -> ServerResponse.ok()
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .body(BodyInserters.fromPublisher(Flux.fromIterable(list), CategoryModel.class)))
         );}
+    @Bean
+    public RouterFunction<ServerResponse> getDocumentByCategoryIdAndSubCategoryName() {
+        return route(
+                GET("/documents/{categoryId}/{subcategory}"),
+                request -> template.find(filterByCategoryAndSubCategory(request.pathVariable("categoryId"),request.pathVariable("subcategory")),DocumentModel.class, "documents")
+                        .collectList()
+                        .flatMap(list -> ServerResponse.ok()
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .body(BodyInserters.fromPublisher(Flux.fromIterable(list), DocumentModel.class)))
+        );}
 
     private Query filterByEmail(String email) {
         return new Query(
                 Criteria.where("email").is(email)
+        );
+    }
+    private Query filterByCategoryAndSubCategory(String category, String subcategory) {
+        return new Query(
+                Criteria.where("categoryId").is(category).and("subCategoryName").is(subcategory)
         );
     }
 }
