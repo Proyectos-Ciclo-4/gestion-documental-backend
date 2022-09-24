@@ -1,7 +1,6 @@
 package docdoc.generic;
 
 import co.com.sofka.domain.generic.DomainEvent;
-
 import java.util.Date;
 
 public class StoredEvent {

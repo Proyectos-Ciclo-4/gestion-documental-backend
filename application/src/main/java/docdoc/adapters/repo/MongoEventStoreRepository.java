@@ -3,6 +3,7 @@ package docdoc.adapters.repo;
 import co.com.sofka.domain.generic.DomainEvent;
 import docdoc.generic.EventStoreRepository;
 import docdoc.generic.StoredEvent;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -16,6 +17,7 @@ import java.util.Comparator;
 public class MongoEventStoreRepository implements EventStoreRepository {
 
     private final ReactiveMongoTemplate template;
+
 
     private final StoredEvent.EventSerializer eventSerializer;
 
