@@ -13,6 +13,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.data.mongodb.core.query.UpdateDefinition;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -63,6 +65,21 @@ public class CommandHandle {
                         DocumentModel.class,
                         "documents"
                 ).then(ServerResponse.ok().build()));
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> updateDocument(){
+
+        UpdateDefinition DocumentModel;
+
+        return route(
+                PUT("/document/update/{id}").and(accept(MediaType.APPLICATION_JSON)),
+                request -> template.findAndModify(
+                        findDocument(request.pathVariable("id")),
+                        DocumentModel,
+                        DocumentModel.class
+        ).then(ServerResponse.ok().build()));
+
     }
 
     /* Querys utilizadas */
