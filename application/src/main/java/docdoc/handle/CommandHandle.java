@@ -35,6 +35,7 @@ public class CommandHandle {
                         .then(ServerResponse.ok().build())
         );
     }
+
     @Bean
     public RouterFunction<ServerResponse> createCategory(CreateCategoryUseCase useCase) {
         return route(
