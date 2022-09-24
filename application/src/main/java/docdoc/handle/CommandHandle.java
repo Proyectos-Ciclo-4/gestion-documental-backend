@@ -9,16 +9,21 @@ import com.sofka.docs.usecase.AddSubcategoryUseCase;
 import com.sofka.docs.usecase.CreateCategoryUseCase;
 import com.sofka.docs.usecase.CreateDocumentUseCase;
 import com.sofka.docs.usecase.DeleteDocumentUseCase;
+import docdoc.handle.model.DocumentModel;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.data.mongodb.core.query.UpdateDefinition;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
-
 import static org.springframework.web.reactive.function.server.RequestPredicates.DELETE;
 import static org.springframework.web.reactive.function.server.RequestPredicates.POST;
 import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
+import static org.springframework.web.reactive.function.server.RequestPredicates.*;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 @Configuration
@@ -59,13 +64,36 @@ public class CommandHandle {
         );
     }
 
-    //ELIMINAR Documento
+
     @Bean
-    public RouterFunction<ServerResponse> deleteDocument(DeleteDocumentUseCase usecase) {
+    public RouterFunction<ServerResponse> deleteDocument(){
         return route(
-                POST("/document/delete").and(accept(MediaType.APPLICATION_JSON)),
-                request -> template.save(request.bodyToMono(DeleteDocumentCommand.class), "documents")
-                        .then(ServerResponse.ok().build())
+            DELETE("/document/delete/{id}").and(accept(MediaType.APPLICATION_JSON)),
+                request -> template.findAndRemove(
+                        findDocument(request.pathVariable("id")),
+                        DocumentModel.class,
+                        "documents"
+                ).then(ServerResponse.ok().build()));
+    }
+
+   /* @Bean
+    public RouterFunction<ServerResponse> updateDocument(){
+        UpdateDefinition DocumentModel;
+        return route(
+                PUT("/document/update/{id}").and(accept(MediaType.APPLICATION_JSON)),
+                request -> template.findAndModify(
+                        findDocument(request.pathVariable("id")),
+                        DocumentModel,
+                        DocumentModel.class
+        ).then(ServerResponse.ok().build()));
+
+    }*/
+    /* Querys utilizadas */
+
+    private Query findDocument(String id){
+        return new Query(
+                Criteria.where("uuid").is(id)
+
         );
     }
 
