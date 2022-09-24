@@ -2,6 +2,7 @@ package docdoc.handle;
 
 import docdoc.handle.model.CategoryModel;
 import docdoc.handle.model.DocumentModel;
+import docdoc.handle.model.SubcategoryModel;
 import docdoc.handle.model.UserModel;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,6 +38,17 @@ public class QueryHandle {
         );
     }
     @Bean
+    public RouterFunction<ServerResponse> getSubcategories() {
+        return route(
+                GET("/subcategory/{categoryId}"),
+                request -> template.find(filterByCategory(request.pathVariable("categoryId")), SubcategoryModel.class, "subcategories")
+                        .collectList()
+                        .flatMap(list -> ServerResponse.ok()
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .body(BodyInserters.fromPublisher(Flux.fromIterable(list), SubcategoryModel.class)))
+        );
+    }
+    @Bean
     public RouterFunction<ServerResponse> getAllCategories() {
         return route(
                 GET("/category/getall"),
@@ -65,6 +77,11 @@ public class QueryHandle {
     private Query filterByCategoryAndSubCategory(String category, String subcategory) {
         return new Query(
                 Criteria.where("categoryId").is(category).and("subCategoryName").is(subcategory)
+        );
+    }
+    private Query filterByCategory(String categoryId) {
+        return new Query(
+                Criteria.where("categoryId").is(categoryId)
         );
     }
 }
