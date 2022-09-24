@@ -38,6 +38,7 @@ public class CreateDocumentUseCaseTest {
         command.setPathDocument("url");
         command.setVersion(1);
         command.setBlockChainId("blockChainId");
+        command.setSubCategoryName("subCategoryName");
 
         StepVerifier.create(useCase.apply(Mono.just(command)))
                 .expectNextMatches(
