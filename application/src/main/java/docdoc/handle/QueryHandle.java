@@ -20,7 +20,7 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 
 @Configuration
 public class QueryHandle {
-    private final ReactiveMongoTemplate template;
+    private  ReactiveMongoTemplate template;
 
     public QueryHandle(ReactiveMongoTemplate template) {
         this.template = template;
@@ -57,6 +57,16 @@ public class QueryHandle {
                                 .body(BodyInserters.fromPublisher(Flux.fromIterable(list), DocumentModel.class)))
         );}
 
+    @Bean
+    public RouterFunction<ServerResponse> getAllDocuments() {
+        return route(
+                GET("/documents/getall"),
+                request -> template.findAll(DocumentModel.class, "documents")
+                        .collectList()
+                        .flatMap(list -> ServerResponse.ok()
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .body(BodyInserters.fromPublisher(Flux.fromIterable(list), DocumentModel.class)))
+        );}
     private Query filterByEmail(String email) {
         return new Query(
                 Criteria.where("email").is(email)
@@ -65,6 +75,11 @@ public class QueryHandle {
     private Query filterByCategoryAndSubCategory(String category, String subcategory) {
         return new Query(
                 Criteria.where("categoryId").is(category).and("subCategoryName").is(subcategory)
+        );
+    }
+    private Query filterByUuid(String uuid) {
+        return new Query(
+                Criteria.where("uuid").is(uuid)
         );
     }
 }

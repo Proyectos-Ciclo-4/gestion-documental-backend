@@ -20,6 +20,16 @@ public class DocumentModel {
     protected String blockChainId;
     protected String description;
 
+    protected String uuid;
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
     public String getName() {
         return name;
     }

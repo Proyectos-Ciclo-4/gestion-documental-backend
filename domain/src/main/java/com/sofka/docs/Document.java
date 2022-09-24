@@ -4,6 +4,7 @@ import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;
 import com.sofka.docs.events.CategoryCreated;
 import com.sofka.docs.events.DocumentCreated;
+import com.sofka.docs.events.DocumentDeleted;
 import com.sofka.docs.events.DocumentUpdated;
 import com.sofka.docs.values.BlockChainId;
 import com.sofka.docs.values.CategoryId;
@@ -79,16 +80,7 @@ public class Document extends AggregateEvent<DocumentId> {
         appendChange(new CategoryCreated()).apply();
     }
 
-
-        /*public void createSubCategory (CategoryId categoryId, SubcategoryName subCategoryName){
-            Objects.requireNonNull(categoryId);
-            var subCategoryId = new SubcategoryId();
-            Objects.requireNonNull(subCategoryName);
-            appendChange(new SubCategoryCreated(categoryId, subCategoryId, subCategoryName)).apply();
-        }
-*/
-
-        public void updateDocument (DocName docName, UserId userId, CategoryId categoryId, LogHistory
+    public void updateDocument (DocName docName, UserId userId, CategoryId categoryId, LogHistory
         logHistory,
                 Instant createdDate, VersionDocument version,
                 PathDocument pathDocument, BlockChainId blockChainId, Descriptiondoc description){
@@ -105,6 +97,6 @@ public class Document extends AggregateEvent<DocumentId> {
         }
 
         public void deleteDocument () {
-
+            appendChange(new DocumentDeleted()).apply();
         }
     }

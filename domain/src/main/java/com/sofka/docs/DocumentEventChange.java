@@ -2,6 +2,7 @@ package com.sofka.docs;
 
 import co.com.sofka.domain.generic.EventChange;
 import com.sofka.docs.events.DocumentCreated;
+import com.sofka.docs.events.DocumentDeleted;
 import com.sofka.docs.values.*;
 
 import java.time.Instant;
@@ -19,6 +20,7 @@ public class DocumentEventChange extends EventChange {
             document.blockChainId = event.getBlockChainId();
             document.subCategoryName = event.getSubcategoryName();
         });
+        apply((DocumentDeleted event) -> {});
 
     }
 }
