@@ -23,12 +23,12 @@ public class QueryHandle {
 
     public QueryHandle(ReactiveMongoTemplate template) {
         this.template = template;
-    }
+    } 
 
     @Bean
     public RouterFunction<ServerResponse> verifyUser() {
         return route(
-                GET("/usuario/{email}"),
+                GET("/user/{email}"),
                 request -> template.findOne(filterByEmail(request.pathVariable("email")), UserModel.class, "users")
                         .flatMap(element -> ServerResponse.ok()
                                 .contentType(MediaType.APPLICATION_JSON)
