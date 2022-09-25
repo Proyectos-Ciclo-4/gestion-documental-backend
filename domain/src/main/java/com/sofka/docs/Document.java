@@ -31,13 +31,11 @@ public class Document extends AggregateEvent<DocumentId> {
     protected DocName name;
 
     protected UserId userId;
-
     protected SubcategoryName subCategoryName;
 
     protected CategoryId categoryId;
 
     protected LogHistory logHistory;
-
 
     protected VersionDocument version;
     protected PathDocument pathDocument;
@@ -61,11 +59,6 @@ public class Document extends AggregateEvent<DocumentId> {
 
     }
 
-    /**
-     * Instantiates a new Aggregate event.
-     *
-     * @param entityId the entity id
-     */
     public Document(DocumentId entityId) {
         super(entityId);
         subscribe(new DocumentEventChange(this));
@@ -98,8 +91,7 @@ public class Document extends AggregateEvent<DocumentId> {
             appendChange(new DocumentUpdated(docName.value(), userId.value(), categoryId.value(), logHistory.toString(),
                     version.value(), pathDocument.value(), blockChainId.value(), description.value())).apply();
         }
-
         public void deleteDocument () {
             appendChange(new DocumentDeleted()).apply();
         }
-    }
+}
