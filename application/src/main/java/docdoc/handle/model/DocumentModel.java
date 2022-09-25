@@ -3,6 +3,7 @@ package docdoc.handle.model;
 
 
 import java.time.Instant;
+import java.time.LocalDate;
 
 public class DocumentModel {
     protected String name;
@@ -12,7 +13,7 @@ public class DocumentModel {
     protected String subCategoryName;
 
     protected String categoryId;
-    protected Instant createdDate;
+    protected LocalDate dateCreated;
 
     protected Integer version;
     protected String pathDocument;
@@ -21,6 +22,7 @@ public class DocumentModel {
     protected String description;
 
     protected String uuid;
+
 
     public String getUuid() {
         return uuid;
@@ -62,12 +64,13 @@ public class DocumentModel {
         this.categoryId = categoryId;
     }
 
-    public Instant getCreatedDate() {
-        return createdDate;
+
+    public LocalDate getDateCreated() {
+        return dateCreated;
     }
 
-    public void setCreatedDate(Instant createdDate) {
-        this.createdDate = createdDate;
+    public void setDateCreated(LocalDate dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
     public Integer getVersion() {
