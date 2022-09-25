@@ -17,7 +17,7 @@ public class RestControllerDocument {
     }
 
     // Actualizar servicios
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public Mono<ResponseEntity<DocumentModel>> updateDocument(@PathVariable String id, @RequestBody DocumentModel documentModel){
         return service.updateDocument(id, documentModel);
     }

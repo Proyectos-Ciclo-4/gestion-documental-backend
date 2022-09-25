@@ -10,7 +10,6 @@ import reactor.core.publisher.Mono;
 @Service
 public class DocumentService {
 
-    // Enlace del repositorio
     private final DocumentRepository documentRepository;
 
     @Autowired
@@ -18,18 +17,21 @@ public class DocumentService {
         this.documentRepository = documentRepository;
     }
 
-    // Servicio de update
+
     public Mono<ResponseEntity<DocumentModel>> updateDocument(String id, DocumentModel docSend){
 
         return documentRepository.findById(id).flatMap(docFind ->{
 
-            docFind.setName(docSend.getName());
-            docFind.setSubCategoryName(docSend.getSubCategoryName());
-            docFind.setCategoryId(docSend.getCategoryId());
-            docFind.setVersion(docSend.getVersion());
-            docFind.setPathDocument(docSend.getPathDocument());
-            docFind.setBlockChainId(docSend.getBlockChainId());
-            docFind.setDescription(docSend.getDescription());
+            docFind.setUserId( IsNull.compareString(docSend.getUserId(),docFind.getUserId()) );
+            docFind.setCategoryId( IsNull.compareString(docSend.getCategoryId(), docFind.getCategoryId()) );
+            docFind.setVersion( docFind.getVersion() + 1 );
+            docFind.setPathDocument( IsNull.compareString(docSend.getPathDocument(), docFind.getPathDocument()) );
+            docFind.setBlockChainId( IsNull.compareString(docSend.getBlockChainId(), docFind.getBlockChainId()) );
+            docFind.setDescription( IsNull.compareString(docSend.getDescription(), docFind.getDescription()) );
+            docFind.setName( IsNull.compareString(docSend.getName(), docFind.getName()) );
+            docFind.setSubCategoryName( IsNull.compareString(docSend.getSubCategoryName(), docFind.getSubCategoryName()) );
+            docFind.setDateCreated(docFind.getDateCreated());
+            docFind.setUuid(docFind.getUuid());
 
             return documentRepository.save(docFind);
 
