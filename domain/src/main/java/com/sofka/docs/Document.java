@@ -4,6 +4,7 @@ import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;
 import com.sofka.docs.events.CategoryCreated;
 import com.sofka.docs.events.DocumentCreated;
+import com.sofka.docs.events.DocumentDeleted;
 import com.sofka.docs.events.DocumentUpdated;
 import com.sofka.docs.values.BlockChainId;
 import com.sofka.docs.values.CategoryId;
@@ -18,6 +19,7 @@ import com.sofka.docs.values.UserId;
 import com.sofka.docs.values.VersionDocument;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -35,13 +37,15 @@ public class Document extends AggregateEvent<DocumentId> {
     protected CategoryId categoryId;
 
     protected LogHistory logHistory;
-    protected Instant createdDate;
+
 
     protected VersionDocument version;
     protected PathDocument pathDocument;
 
     protected BlockChainId blockChainId;
     protected Descriptiondoc description;
+
+    protected LocalDate dateCreated;
 
 
     public Document(DocumentId entityId,
@@ -50,10 +54,10 @@ public class Document extends AggregateEvent<DocumentId> {
                     VersionDocument version,
                     PathDocument pathDocument,
                     BlockChainId blockChainId,
-                    Descriptiondoc description,SubcategoryName subCategoryName) {
+                    Descriptiondoc description,SubcategoryName subCategoryName, LocalDate dateCreated) {
         super(entityId);
         subscribe(new DocumentEventChange(this));
-        appendChange(new DocumentCreated(categoryId, version.value(), pathDocument, blockChainId, description, name,subCategoryName)).apply();
+        appendChange(new DocumentCreated(categoryId, version.value(), pathDocument, blockChainId, description, name,subCategoryName,dateCreated)).apply();
 
     }
 
@@ -79,16 +83,7 @@ public class Document extends AggregateEvent<DocumentId> {
         appendChange(new CategoryCreated()).apply();
     }
 
-
-        /*public void createSubCategory (CategoryId categoryId, SubcategoryName subCategoryName){
-            Objects.requireNonNull(categoryId);
-            var subCategoryId = new SubcategoryId();
-            Objects.requireNonNull(subCategoryName);
-            appendChange(new SubCategoryCreated(categoryId, subCategoryId, subCategoryName)).apply();
-        }
-*/
-
-        public void updateDocument (DocName docName, UserId userId, CategoryId categoryId, LogHistory
+    public void updateDocument (DocName docName, UserId userId, CategoryId categoryId, LogHistory
         logHistory,
                 Instant createdDate, VersionDocument version,
                 PathDocument pathDocument, BlockChainId blockChainId, Descriptiondoc description){
@@ -105,6 +100,6 @@ public class Document extends AggregateEvent<DocumentId> {
         }
 
         public void deleteDocument () {
-
+            appendChange(new DocumentDeleted()).apply();
         }
     }

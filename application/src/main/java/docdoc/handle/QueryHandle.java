@@ -2,6 +2,7 @@ package docdoc.handle;
 
 import docdoc.handle.model.CategoryModel;
 import docdoc.handle.model.DocumentModel;
+import docdoc.handle.model.SubcategoryModel;
 import docdoc.handle.model.UserModel;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,20 +21,31 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 
 @Configuration
 public class QueryHandle {
-    private final ReactiveMongoTemplate template;
+    private  ReactiveMongoTemplate template;
 
     public QueryHandle(ReactiveMongoTemplate template) {
         this.template = template;
-    }
+    } 
 
     @Bean
     public RouterFunction<ServerResponse> verifyUser() {
         return route(
-                GET("/usuario/{email}"),
+                GET("/user/{email}"),
                 request -> template.findOne(filterByEmail(request.pathVariable("email")), UserModel.class, "users")
                         .flatMap(element -> ServerResponse.ok()
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .body(BodyInserters.fromPublisher(Mono.just(element), UserModel.class)))
+        );
+    }
+    @Bean
+    public RouterFunction<ServerResponse> getSubcategories() {
+        return route(
+                GET("/subcategory/{categoryId}"),
+                request -> template.find(filterByCategory(request.pathVariable("categoryId")), SubcategoryModel.class, "subcategories")
+                        .collectList()
+                        .flatMap(list -> ServerResponse.ok()
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .body(BodyInserters.fromPublisher(Flux.fromIterable(list), SubcategoryModel.class)))
         );
     }
     @Bean
@@ -57,14 +69,29 @@ public class QueryHandle {
                                 .body(BodyInserters.fromPublisher(Flux.fromIterable(list), DocumentModel.class)))
         );}
 
+    @Bean
+    public RouterFunction<ServerResponse> getAllDocuments() {
+        return route(
+                GET("/documents/getall"),
+                request -> template.findAll(DocumentModel.class, "documents")
+                        .collectList()
+                        .flatMap(list -> ServerResponse.ok()
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .body(BodyInserters.fromPublisher(Flux.fromIterable(list), DocumentModel.class)))
+        );}
     private Query filterByEmail(String email) {
         return new Query(
                 Criteria.where("email").is(email)
-        );
-    }
+        );}
     private Query filterByCategoryAndSubCategory(String category, String subcategory) {
         return new Query(
                 Criteria.where("categoryId").is(category).and("subCategoryName").is(subcategory)
-        );
+        );}
+
+    private Query filterByUuid(String uuid) {
+        return new Query(Criteria.where("uuid").is(uuid));}
+
+    private Query filterByCategory(String categoryId) {
+        return new Query(Criteria.where("categoryId").is(categoryId));
     }
 }

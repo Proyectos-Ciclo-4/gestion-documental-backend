@@ -5,9 +5,11 @@ import com.sofka.docs.commands.CreateCategoryCommand;
 import com.sofka.docs.commands.CreateDocumentCommand;
 import com.sofka.docs.commands.CreateSubCategoryCommand;
 import com.sofka.docs.commands.UpdateDocumentCommand;
+import com.sofka.docs.commands.DeleteDocumentCommand;
 import com.sofka.docs.usecase.AddSubcategoryUseCase;
 import com.sofka.docs.usecase.CreateCategoryUseCase;
 import com.sofka.docs.usecase.CreateDocumentUseCase;
+import com.sofka.docs.usecase.DeleteDocumentUseCase;
 import docdoc.handle.model.DocumentModel;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +24,9 @@ import org.springframework.web.reactive.function.BodyExtractor;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
-
+import static org.springframework.web.reactive.function.server.RequestPredicates.DELETE;
+import static org.springframework.web.reactive.function.server.RequestPredicates.POST;
+import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
 import static org.springframework.web.reactive.function.server.RequestPredicates.*;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
@@ -30,9 +34,12 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 public class CommandHandle {
 
     private final ReactiveMongoTemplate template;
+    private ErrorHandler errorHandler;
 
-    public CommandHandle(ReactiveMongoTemplate template) {
+    public CommandHandle(ReactiveMongoTemplate template, ErrorHandler errorHandler) {
+
         this.template = template;
+        this.errorHandler = errorHandler;
     }
 
     @Bean
@@ -61,6 +68,7 @@ public class CommandHandle {
         );
     }
 
+
     @Bean
     public RouterFunction<ServerResponse> deleteDocument(){
         return route(
@@ -76,6 +84,7 @@ public class CommandHandle {
     public RouterFunction<ServerResponse> updateDocument(){
 
         FindAndReplaceOptions options = new FindAndReplaceOptions().upsert().returnNew();
+        UpdateDefinition DocumentModel;
 
         return route(
             PUT("/document/update/{id}").and(accept(MediaType.APPLICATION_JSON)),
@@ -101,12 +110,13 @@ public class CommandHandle {
                 .set("description", currentDoc.getDescription());
 
     }
-
+    
     /* Querys utilizadas */
 
     private Query findDocument(String id){
         return new Query(
                 Criteria.where("uuid").is(id)
+
         );
     }
 
