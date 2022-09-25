@@ -2,9 +2,13 @@ package docdoc.handle.model;
 
 
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.time.Instant;
 import java.time.LocalDate;
 
+@Document(collection = "documents")
 public class DocumentModel {
     protected String name;
 
@@ -21,6 +25,7 @@ public class DocumentModel {
     protected String blockChainId;
     protected String description;
 
+    @Id
     protected String uuid;
 
 

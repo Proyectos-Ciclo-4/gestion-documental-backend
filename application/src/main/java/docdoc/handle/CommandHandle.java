@@ -80,7 +80,7 @@ public class CommandHandle {
                 ).then(ServerResponse.ok().build()));
     }
 
-   /* @Bean
+   /*@Bean
     public RouterFunction<ServerResponse> updateDocument(){
 
         FindAndReplaceOptions options = new FindAndReplaceOptions().upsert().returnNew();
@@ -90,7 +90,7 @@ public class CommandHandle {
             PUT("/document/update/{id}").and(accept(MediaType.APPLICATION_JSON)),
             request -> template.findAndModify(
                 findDocument(request.pathVariable("id")),
-                updateDocument(request.body(BodyExtractor<DocumentModel.class>)), // No se como obtener el malditobody de la request
+                updateDocument(request.body(BodyExtractor<DocumentModel>)), // No se como obtener el malditobody de la request
                 DocumentModel.class,
                 "documents"
             ).then(ServerResponse.ok().build())
@@ -110,7 +110,7 @@ public class CommandHandle {
                 .set("description", currentDoc.getDescription());
 
     }
-    
+
     /* Querys utilizadas */
 
     private Query findDocument(String id){
