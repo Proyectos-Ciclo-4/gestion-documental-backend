@@ -4,20 +4,25 @@ package docdoc.handle;
 import com.sofka.docs.commands.CreateCategoryCommand;
 import com.sofka.docs.commands.CreateDocumentCommand;
 import com.sofka.docs.commands.CreateSubCategoryCommand;
+import com.sofka.docs.commands.UpdateDocumentCommand;
 import com.sofka.docs.usecase.AddSubcategoryUseCase;
 import com.sofka.docs.usecase.CreateCategoryUseCase;
 import com.sofka.docs.usecase.CreateDocumentUseCase;
 import docdoc.handle.model.DocumentModel;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mongodb.core.FindAndReplaceOptions;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.data.mongodb.core.query.UpdateDefinition;
 import org.springframework.http.MediaType;
+import org.springframework.web.reactive.function.BodyExtractor;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
+import reactor.core.publisher.Mono;
+
 import static org.springframework.web.reactive.function.server.RequestPredicates.*;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
@@ -67,18 +72,33 @@ public class CommandHandle {
                 ).then(ServerResponse.ok().build()));
     }
 
-    @Bean
+   /* @Bean
     public RouterFunction<ServerResponse> updateDocument(){
 
-        UpdateDefinition DocumentModel;
+        FindAndReplaceOptions options = new FindAndReplaceOptions().upsert().returnNew();
 
         return route(
-                PUT("/document/update/{id}").and(accept(MediaType.APPLICATION_JSON)),
-                request -> template.findAndModify(
-                        findDocument(request.pathVariable("id")),
-                        DocumentModel,
-                        DocumentModel.class
-        ).then(ServerResponse.ok().build()));
+            PUT("/document/update/{id}").and(accept(MediaType.APPLICATION_JSON)),
+            request -> template.findAndModify(
+                findDocument(request.pathVariable("id")),
+                updateDocument(request.body(BodyExtractor<DocumentModel.class>)), // No se como obtener el malditobody de la request
+                DocumentModel.class,
+                "documents"
+            ).then(ServerResponse.ok().build())
+        );
+
+    }*/
+
+    private Update updateDocument(DocumentModel currentDoc){
+
+        return new Update()
+                .set("name", currentDoc.getName())
+                .set("subCategoryName",currentDoc.getSubCategoryName())
+                .set("categoryId", currentDoc.getCategoryId())
+                .set("version", currentDoc.getVersion())
+                .set("pathDocument", currentDoc.getPathDocument())
+                .set("blockChainId",currentDoc.getBlockChainId())
+                .set("description", currentDoc.getDescription());
 
     }
 
