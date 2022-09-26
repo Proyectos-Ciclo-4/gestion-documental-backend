@@ -14,6 +14,7 @@ import com.sofka.docs.values.UserId;
 
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Map;
 
 public class DocumentCreated extends DomainEvent {
@@ -24,7 +25,7 @@ public class DocumentCreated extends DomainEvent {
     private CategoryId categoryId;
     private CategoryDoc category;
     private String logHistory;
-    private LocalDate dateCreated;
+    private LocalDateTime dateCreated;
     private Integer version;
     private SubcategoryName subcategoryName;
 
@@ -38,7 +39,7 @@ public class DocumentCreated extends DomainEvent {
         return docName;
     }
 
-    public DocumentCreated( CategoryId categoryId, Integer version, PathDocument pathDocument, BlockChainId blockChainId, Descriptiondoc description, DocName docName,SubcategoryName subcategoryName,LocalDate dateCreated) {
+    public DocumentCreated( CategoryId categoryId, Integer version, PathDocument pathDocument, BlockChainId blockChainId, Descriptiondoc description, DocName docName,SubcategoryName subcategoryName,LocalDateTime dateCreated) {
         super("sofka.docs.documentcreated");
         this.categoryId = categoryId;
         this.version = version;
@@ -86,7 +87,7 @@ public class DocumentCreated extends DomainEvent {
         return subcategoryName;
     }
 
-    public LocalDate getCreatedDate() {
+    public LocalDateTime getCreatedDate() {
         return dateCreated;
     }
 }
