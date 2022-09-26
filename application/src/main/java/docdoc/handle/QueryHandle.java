@@ -68,7 +68,27 @@ public class QueryHandle {
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .body(BodyInserters.fromPublisher(Flux.fromIterable(list), DocumentModel.class)))
         );}
-
+    @Bean
+    public RouterFunction<ServerResponse> getDocumentByCategoryIdAndSubCategoryNull() {
+        return route(
+                GET("/document/{categoryId}"),
+                request -> template.find(filterByCategoryAndSubCategoryNull(request.pathVariable("categoryId")),DocumentModel.class, "documents")
+                        .collectList()
+                        .flatMap(list -> ServerResponse.ok()
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .body(BodyInserters.fromPublisher(Flux.fromIterable(list), DocumentModel.class)))
+        );}
+    @Bean
+    public RouterFunction<ServerResponse> getDocumentsByCategory() {
+        return route(
+                GET("/documents/{categoryId}"),
+                request -> template.find(filterByCategory(request.pathVariable("categoryId")), DocumentModel.class, "documents")
+                        .collectList()
+                        .flatMap(list -> ServerResponse.ok()
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .body(BodyInserters.fromPublisher(Flux.fromIterable(list), DocumentModel.class)))
+        );
+    }
     @Bean
     public RouterFunction<ServerResponse> getAllDocuments() {
         return route(
@@ -87,7 +107,10 @@ public class QueryHandle {
         return new Query(
                 Criteria.where("categoryId").is(category).and("subCategoryName").is(subcategory)
         );}
-
+    private Query filterByCategoryAndSubCategoryNull(String category) {
+        return new Query(
+                Criteria.where("categoryId").is(category).and("subCategoryName").is("")
+        );}
     private Query filterByUuid(String uuid) {
         return new Query(Criteria.where("uuid").is(uuid));}
 
