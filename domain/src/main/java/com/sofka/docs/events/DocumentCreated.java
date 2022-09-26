@@ -9,8 +9,10 @@ import com.sofka.docs.values.DocName;
 import com.sofka.docs.values.DocumentId;
 import com.sofka.docs.values.LogHistoryId;
 import com.sofka.docs.values.PathDocument;
+import com.sofka.docs.values.SubcategoryName;
 import com.sofka.docs.values.UserId;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Map;
 
@@ -22,35 +24,21 @@ public class DocumentCreated extends DomainEvent {
     private CategoryId categoryId;
     private CategoryDoc category;
     private String logHistory;
-    private LocalDate createdDate;
+    private LocalDate dateCreated;
     private Integer version;
-
-    @Override
-    public String toString() {
-        return "DocumentCreated{" +
-                "logHistoryId=" + logHistoryId +
-                ", categoryId=" + categoryId +
-                ", category=" + category +
-                ", logHistory='" + logHistory + '\'' +
-                ", createdDate=" + createdDate +
-                ", version=" + version +
-                ", pathDocument=" + pathDocument +
-                ", blockChainId=" + blockChainId +
-                ", description=" + description +
-                ", docName=" + docName +
-                '}';
-    }
+    private SubcategoryName subcategoryName;
 
     private PathDocument pathDocument;
     private BlockChainId blockChainId;
     private Descriptiondoc description;
     private DocName docName;
 
+
     public DocName getDocName() {
         return docName;
     }
 
-    public DocumentCreated( CategoryId categoryId, Integer version, PathDocument pathDocument, BlockChainId blockChainId, Descriptiondoc description, DocName docName) {
+    public DocumentCreated( CategoryId categoryId, Integer version, PathDocument pathDocument, BlockChainId blockChainId, Descriptiondoc description, DocName docName,SubcategoryName subcategoryName,LocalDate dateCreated) {
         super("sofka.docs.documentcreated");
         this.categoryId = categoryId;
         this.version = version;
@@ -58,6 +46,8 @@ public class DocumentCreated extends DomainEvent {
         this.blockChainId = blockChainId;
         this.description = description;
         this.docName = docName;
+        this.subcategoryName = subcategoryName;
+        this.dateCreated = dateCreated;
     }
 
     public LogHistoryId getLogHistoryId() {
@@ -90,5 +80,13 @@ public class DocumentCreated extends DomainEvent {
 
     public BlockChainId getBlockChainId() {
         return blockChainId;
+    }
+
+    public SubcategoryName getSubcategoryName() {
+        return subcategoryName;
+    }
+
+    public LocalDate getCreatedDate() {
+        return dateCreated;
     }
 }

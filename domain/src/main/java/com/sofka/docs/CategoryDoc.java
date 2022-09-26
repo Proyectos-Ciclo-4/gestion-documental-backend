@@ -71,7 +71,4 @@ public class CategoryDoc extends AggregateEvent<CategoryId> {
         return subCategory;
     }
 
-    public void setSubCategory(SubCategory subCategory) {
-        this.subCategory.add(subCategory) ;
-    }
 }

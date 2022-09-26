@@ -40,14 +40,10 @@ class AddSubcategoryUseCaseTest {
                 .expectNextMatches(domainEvent -> {
                     var event = (SubCategoryCreated) domainEvent;
                     return event.aggregateRootId().equals("Animales");
+
                 })
                 .expectComplete()
                 .verify();
-
-
-
-
-
     }
     private Flux<DomainEvent> history(){
         var event = new CategoryCreated( UserId.of("user1"),

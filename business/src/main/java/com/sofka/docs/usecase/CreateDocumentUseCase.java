@@ -3,23 +3,20 @@ package com.sofka.docs.usecase;
 import co.com.sofka.domain.generic.DomainEvent;
 import com.sofka.docs.Document;
 import com.sofka.docs.commands.CreateDocumentCommand;
-import com.sofka.docs.gateway.DocumentDomainEventRepository;
 import com.sofka.docs.values.BlockChainId;
 import com.sofka.docs.values.CategoryId;
 import com.sofka.docs.values.Descriptiondoc;
 import com.sofka.docs.values.DocName;
 import com.sofka.docs.values.DocumentId;
 import com.sofka.docs.values.PathDocument;
+import com.sofka.docs.values.SubcategoryName;
 import com.sofka.docs.values.VersionDocument;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public class CreateDocumentUseCase extends UseCaseForCommand<CreateDocumentCommand> {
-    private final DocumentDomainEventRepository repository;
+import java.time.Instant;
 
-    public CreateDocumentUseCase(DocumentDomainEventRepository repository) {
-        this.repository = repository;
-    }
+public class CreateDocumentUseCase extends UseCaseForCommand<CreateDocumentCommand> {
 
     @Override
     public Flux<DomainEvent> apply(Mono<CreateDocumentCommand> crearDocumentcommand) {
@@ -30,8 +27,9 @@ public class CreateDocumentUseCase extends UseCaseForCommand<CreateDocumentComma
                     new VersionDocument(command.getVersion()),
                     new PathDocument(command.getPathDocument()),
                     new BlockChainId(command.getBlockChainId()),
-                    new Descriptiondoc(command.getDescription()));
-
+                    new Descriptiondoc(command.getDescription()),
+                    new SubcategoryName(command.getSubCategoryName()),
+                    command.getDateCreated());
             return document.getUncommittedChanges();
         });
     }
