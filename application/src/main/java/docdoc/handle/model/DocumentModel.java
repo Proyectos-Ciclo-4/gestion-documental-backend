@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Document(collection = "documents")
 public class DocumentModel {
@@ -17,7 +18,7 @@ public class DocumentModel {
     protected String subCategoryName;
 
     protected String categoryId;
-    protected LocalDate dateCreated;
+    protected LocalDateTime dateCreated;
 
     protected Integer version;
     protected String pathDocument;
@@ -70,11 +71,11 @@ public class DocumentModel {
     }
 
 
-    public LocalDate getDateCreated() {
+    public LocalDateTime getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(LocalDate dateCreated) {
+    public void setDateCreated(LocalDateTime dateCreated) {
         this.dateCreated = dateCreated;
     }
 

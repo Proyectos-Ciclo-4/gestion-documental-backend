@@ -4,6 +4,7 @@ import co.com.sofka.domain.generic.Command;
 
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class CreateDocumentCommand extends Command {
 
@@ -16,13 +17,13 @@ public class CreateDocumentCommand extends Command {
     private String description;
     private String name;
     private String subCategoryName;
-    private LocalDate dateCreated;
+    private LocalDateTime dateCreated;
 
-    public LocalDate getDateCreated() {
+    public LocalDateTime getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(LocalDate dateCreated) {
+    public void setDateCreated(LocalDateTime dateCreated) {
         this.dateCreated = dateCreated;
     }
 

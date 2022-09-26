@@ -20,6 +20,7 @@ import com.sofka.docs.values.VersionDocument;
 
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -43,7 +44,7 @@ public class Document extends AggregateEvent<DocumentId> {
     protected BlockChainId blockChainId;
     protected Descriptiondoc description;
 
-    protected LocalDate dateCreated;
+    protected LocalDateTime dateCreated;
 
 
     public Document(DocumentId entityId,
@@ -52,7 +53,7 @@ public class Document extends AggregateEvent<DocumentId> {
                     VersionDocument version,
                     PathDocument pathDocument,
                     BlockChainId blockChainId,
-                    Descriptiondoc description,SubcategoryName subCategoryName, LocalDate dateCreated) {
+                    Descriptiondoc description,SubcategoryName subCategoryName, LocalDateTime dateCreated) {
         super(entityId);
         subscribe(new DocumentEventChange(this));
         appendChange(new DocumentCreated(categoryId, version.value(), pathDocument, blockChainId, description, name,subCategoryName,dateCreated)).apply();
