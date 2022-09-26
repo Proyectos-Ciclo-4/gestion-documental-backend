@@ -3,17 +3,18 @@ package docdoc.handle.model;
 import java.util.Set;
 
 public class CategoryModel {
-    private String categoryId;
+
+    private String _id;
     private String categoryName;
     private Set<String> subcategories;
     private String userId;
 
     public String getCategoryId() {
-        return categoryId;
+        return _id;
     }
 
     public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
+        this._id = categoryId;
     }
 
     public String getCategoryName() {

@@ -41,13 +41,4 @@ public class CommandHandle {
                         .then(ServerResponse.ok().build())
         );
     }
-    @Bean
-    public RouterFunction<ServerResponse> createSubCategory(CreateCategoryUseCase useCase) {
-        return route(
-                POST("/category/create").and(accept(MediaType.APPLICATION_JSON)),
-                request -> template.save(request.bodyToMono(CreateCategoryCommand.class), "categories")
-                        .then(ServerResponse.ok().build())
-        );
-    }
-
 }
