@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 
 @Document(collection = "documents")
 public class DocumentModel {
+
     protected String name;
 
     protected String userId;
@@ -18,17 +19,16 @@ public class DocumentModel {
     protected String subCategoryName;
 
     protected String categoryId;
-    protected LocalDateTime dateCreated;
 
     protected Integer version;
+
     protected String pathDocument;
 
     protected String blockChainId;
-    protected String description;
 
+    protected String description;
     @Id
     protected String uuid;
-
 
     public String getUuid() {
         return uuid;
@@ -68,15 +68,6 @@ public class DocumentModel {
 
     public void setCategoryId(String categoryId) {
         this.categoryId = categoryId;
-    }
-
-
-    public LocalDateTime getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(LocalDateTime dateCreated) {
-        this.dateCreated = dateCreated;
     }
 
     public Integer getVersion() {

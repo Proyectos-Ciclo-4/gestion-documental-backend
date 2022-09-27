@@ -11,20 +11,16 @@ public class CreateDocumentCommand extends Command {
     private String documentId;
     private String userId;
     private String categoryId;
-     private Integer version;
+    private Integer version;
     private String pathDocument;
     private String blockChainId;
     private String description;
     private String name;
     private String subCategoryName;
-    private LocalDateTime dateCreated;
+    private Instant dateCreated = Instant.now();
 
-    public LocalDateTime getDateCreated() {
+    public Instant getDateCreated() {
         return dateCreated;
-    }
-
-    public void setDateCreated(LocalDateTime dateCreated) {
-        this.dateCreated = dateCreated;
     }
 
     public String getSubCategoryName() {
@@ -50,6 +46,7 @@ public class CreateDocumentCommand extends Command {
     public String getUserId() {
         return userId;
     }
+
     public String getCategoryId() {
         return categoryId;
     }
@@ -82,7 +79,7 @@ public class CreateDocumentCommand extends Command {
         this.categoryId = categoryId;
     }
 
-        public void setVersion(Integer version) {
+    public void setVersion(Integer version) {
         this.version = version;
     }
 

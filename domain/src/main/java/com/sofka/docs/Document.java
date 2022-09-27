@@ -4,8 +4,6 @@ import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;
 import com.sofka.docs.events.CategoryCreated;
 import com.sofka.docs.events.DocumentCreated;
-import com.sofka.docs.events.DocumentDeleted;
-import com.sofka.docs.events.DocumentUpdated;
 import com.sofka.docs.values.BlockChainId;
 import com.sofka.docs.values.CategoryId;
 import com.sofka.docs.values.CategoryName;
@@ -13,13 +11,11 @@ import com.sofka.docs.values.Descriptiondoc;
 import com.sofka.docs.values.DocName;
 import com.sofka.docs.values.DocumentId;
 import com.sofka.docs.values.PathDocument;
-import com.sofka.docs.values.SubCategory;
 import com.sofka.docs.values.SubcategoryName;
 import com.sofka.docs.values.UserId;
 import com.sofka.docs.values.VersionDocument;
 
 import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -44,8 +40,7 @@ public class Document extends AggregateEvent<DocumentId> {
     protected BlockChainId blockChainId;
     protected Descriptiondoc description;
 
-    protected LocalDateTime dateCreated;
-
+    protected Instant dateCreated;
 
     public Document(DocumentId entityId,
                     DocName name,
@@ -53,7 +48,7 @@ public class Document extends AggregateEvent<DocumentId> {
                     VersionDocument version,
                     PathDocument pathDocument,
                     BlockChainId blockChainId,
-                    Descriptiondoc description,SubcategoryName subCategoryName, LocalDateTime dateCreated) {
+                    Descriptiondoc description,SubcategoryName subCategoryName, Instant dateCreated) {
         super(entityId);
         subscribe(new DocumentEventChange(this));
         appendChange(new DocumentCreated(categoryId, version.value(), pathDocument, blockChainId, description, name,subCategoryName,dateCreated)).apply();
@@ -77,22 +72,4 @@ public class Document extends AggregateEvent<DocumentId> {
         appendChange(new CategoryCreated()).apply();
     }
 
-    public void updateDocument (DocName docName, UserId userId, CategoryId categoryId, LogHistory
-        logHistory,
-                Instant createdDate, VersionDocument version,
-                PathDocument pathDocument, BlockChainId blockChainId, Descriptiondoc description){
-            Objects.requireNonNull(docName);
-            Objects.requireNonNull(userId);
-            Objects.requireNonNull(categoryId);
-            Objects.requireNonNull(logHistory);
-            Objects.requireNonNull(createdDate);
-            Objects.requireNonNull(version);
-            Objects.requireNonNull(description);
-            Objects.requireNonNull(pathDocument);
-            appendChange(new DocumentUpdated(docName.value(), userId.value(), categoryId.value(), logHistory.toString(),
-                    version.value(), pathDocument.value(), blockChainId.value(), description.value())).apply();
-        }
-        public void deleteDocument () {
-            appendChange(new DocumentDeleted()).apply();
-        }
 }

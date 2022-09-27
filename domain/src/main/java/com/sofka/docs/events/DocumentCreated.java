@@ -20,15 +20,14 @@ import java.util.Map;
 public class DocumentCreated extends DomainEvent {
 
     //private String userId;
-  //  private Map<DocumentId, UserId> downloads;
+    //  private Map<DocumentId, UserId> downloads;
     private LogHistoryId logHistoryId;
     private CategoryId categoryId;
     private CategoryDoc category;
     private String logHistory;
-    private LocalDateTime dateCreated;
+    private Instant dateCreated;
     private Integer version;
     private SubcategoryName subcategoryName;
-
     private PathDocument pathDocument;
     private BlockChainId blockChainId;
     private Descriptiondoc description;
@@ -39,7 +38,8 @@ public class DocumentCreated extends DomainEvent {
         return docName;
     }
 
-    public DocumentCreated( CategoryId categoryId, Integer version, PathDocument pathDocument, BlockChainId blockChainId, Descriptiondoc description, DocName docName,SubcategoryName subcategoryName,LocalDateTime dateCreated) {
+    public DocumentCreated(CategoryId categoryId, Integer version, PathDocument pathDocument, BlockChainId blockChainId,
+                           Descriptiondoc description, DocName docName, SubcategoryName subcategoryName, Instant dateCreated) {
         super("sofka.docs.documentcreated");
         this.categoryId = categoryId;
         this.version = version;
@@ -87,7 +87,7 @@ public class DocumentCreated extends DomainEvent {
         return subcategoryName;
     }
 
-    public LocalDateTime getCreatedDate() {
+    public Instant getCreatedDate() {
         return dateCreated;
     }
 }

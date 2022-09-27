@@ -4,7 +4,7 @@ import co.com.sofka.domain.generic.Identity;
 
 public class DownloadId extends Identity {
 
-    private DownloadId(String uuid) {
+    public DownloadId(String uuid) {
         super(uuid);
     }
 
