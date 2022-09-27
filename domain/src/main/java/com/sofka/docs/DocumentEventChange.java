@@ -2,11 +2,7 @@ package com.sofka.docs;
 
 import co.com.sofka.domain.generic.EventChange;
 import com.sofka.docs.events.DocumentCreated;
-import com.sofka.docs.events.DocumentDeleted;
 import com.sofka.docs.values.*;
-
-import java.time.Instant;
-import java.time.LocalDate;
 
 public class DocumentEventChange extends EventChange {
 
@@ -21,7 +17,5 @@ public class DocumentEventChange extends EventChange {
             document.subCategoryName = event.getSubcategoryName();
             document.dateCreated= event.getCreatedDate();
         });
-        apply((DocumentDeleted event) -> {});
-
     }
 }

@@ -3,31 +3,26 @@ package docdoc.handle;
 
 import com.sofka.docs.commands.CreateCategoryCommand;
 import com.sofka.docs.commands.CreateDocumentCommand;
+import com.sofka.docs.commands.CreateDownloadCommand;
 import com.sofka.docs.commands.CreateSubCategoryCommand;
-import com.sofka.docs.commands.UpdateDocumentCommand;
-import com.sofka.docs.commands.DeleteDocumentCommand;
-import com.sofka.docs.usecase.AddSubcategoryUseCase;
+import com.sofka.docs.usecase.CreateDownloadUseCase;
+import com.sofka.docs.usecase.CreateSubcategoryUseCase;
 import com.sofka.docs.usecase.CreateCategoryUseCase;
 import com.sofka.docs.usecase.CreateDocumentUseCase;
-import com.sofka.docs.usecase.DeleteDocumentUseCase;
 import docdoc.handle.model.DocumentModel;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.mongodb.core.FindAndReplaceOptions;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
-import org.springframework.data.mongodb.core.query.UpdateDefinition;
 import org.springframework.http.MediaType;
-import org.springframework.web.reactive.function.BodyExtractor;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
-import reactor.core.publisher.Mono;
+
 import static org.springframework.web.reactive.function.server.RequestPredicates.DELETE;
 import static org.springframework.web.reactive.function.server.RequestPredicates.POST;
 import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
-import static org.springframework.web.reactive.function.server.RequestPredicates.*;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 @Configuration
@@ -50,6 +45,14 @@ public class CommandHandle {
                         .then(ServerResponse.ok().build())
         );
     }
+    @Bean
+    public RouterFunction<ServerResponse> createDownload(CreateDownloadUseCase useCase) {
+        return route(
+                POST("/download/create").and(accept(MediaType.APPLICATION_JSON)),
+                request -> template.save(request.bodyToMono(CreateDownloadCommand.class), "downloads")
+                        .then(ServerResponse.ok().build())
+        );
+    }
 
     @Bean
     public RouterFunction<ServerResponse> createCategory(CreateCategoryUseCase useCase) {
@@ -60,7 +63,7 @@ public class CommandHandle {
         );
     }
     @Bean
-    public RouterFunction<ServerResponse> createSubCategory(AddSubcategoryUseCase useCase) {
+    public RouterFunction<ServerResponse> createSubCategory(CreateSubcategoryUseCase useCase) {
         return route(
                 POST("/subcategory/create").and(accept(MediaType.APPLICATION_JSON)),
                 request -> template.save(request.bodyToMono(CreateSubCategoryCommand.class), "subcategories")
