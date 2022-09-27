@@ -3,7 +3,7 @@ package com.sofka.docs.values;
 import co.com.sofka.domain.generic.Identity;
 
 public class UserId extends Identity {
-    private UserId(String uuid){
+    public UserId(String uuid){
         super(uuid);
     }
 

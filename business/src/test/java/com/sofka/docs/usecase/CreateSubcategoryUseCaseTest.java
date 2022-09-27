@@ -17,17 +17,14 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
-import java.util.Set;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class AddSubcategoryUseCaseTest {
+class CreateSubcategoryUseCaseTest {
     @Mock
     private DocumentDomainEventRepository repository;
     @InjectMocks
-    private AddSubcategoryUseCase useCase;
+    private CreateSubcategoryUseCase useCase;
     @Test
     void agregarSubacategoria(){
         var command= new CreateSubCategoryCommand();

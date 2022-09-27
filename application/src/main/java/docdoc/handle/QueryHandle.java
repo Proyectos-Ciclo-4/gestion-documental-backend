@@ -2,6 +2,7 @@ package docdoc.handle;
 
 import docdoc.handle.model.CategoryModel;
 import docdoc.handle.model.DocumentModel;
+import docdoc.handle.model.DownloadModel;
 import docdoc.handle.model.SubcategoryModel;
 import docdoc.handle.model.UserModel;
 import org.springframework.context.annotation.Bean;
@@ -16,12 +17,16 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 @Configuration
 public class QueryHandle {
-    private final ReactiveMongoTemplate template;
+    private  ReactiveMongoTemplate template;
 
     public QueryHandle(ReactiveMongoTemplate template) {
         this.template = template;
@@ -68,20 +73,82 @@ public class QueryHandle {
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .body(BodyInserters.fromPublisher(Flux.fromIterable(list), DocumentModel.class)))
         );}
+    @Bean
+    public RouterFunction<ServerResponse> getDocumentByCategoryIdAndSubCategoryNull() {
+        return route(
+                GET("/document/{categoryId}"),
+                request -> template.find(filterByCategoryAndSubCategoryNull(request.pathVariable("categoryId")),DocumentModel.class, "documents")
+                        .collectList()
+                        .flatMap(list -> ServerResponse.ok()
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .body(BodyInserters.fromPublisher(Flux.fromIterable(list), DocumentModel.class)))
+        );}
+    @Bean
+    public RouterFunction<ServerResponse> getDocumentsByCategory() {
+        return route(
+                GET("/documents/{categoryId}"),
+                request -> template.find(filterByCategory(request.pathVariable("categoryId")), DocumentModel.class, "documents")
+                        .collectList()
+                        .flatMap(list -> ServerResponse.ok()
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .body(BodyInserters.fromPublisher(Flux.fromIterable(list), DocumentModel.class)))
+        );
+    }
+    @Bean
+    public RouterFunction<ServerResponse> getAllDocuments() {
+        return route(
+                GET("/documents/getall"),
+                request -> template.findAll(DocumentModel.class, "documents")
+                        .collectList()
+                        .flatMap(list -> ServerResponse.ok()
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .body(BodyInserters.fromPublisher(Flux.fromIterable(list), DocumentModel.class)))
+        );}
+
+    @Bean
+    public RouterFunction<ServerResponse> getAllDownloads() {
+        return route(
+                GET("/downloads/getall"),
+                request -> template.findAll(DownloadModel.class, "downloads")
+                        .collectList()
+                        .flatMap(list -> ServerResponse.ok()
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .body(BodyInserters.fromPublisher(Flux.fromIterable(list), DownloadModel.class)))
+        );}
+
+    @Bean
+    public RouterFunction<ServerResponse> getDownloadsByTimePeriod() {
+        return route(
+                GET("/downloads/{startDate}/{finalDate}"),
+                request -> template.find(filterByTimePeriod(LocalDateTime.parse(request.pathVariable("startDate"), DateTimeFormatter.ISO_DATE_TIME),
+                                LocalDateTime.parse(request.pathVariable("finalDate"),DateTimeFormatter.ISO_DATE_TIME)),DownloadModel.class, "downloads")
+                        .collectList()
+                        .flatMap(list -> ServerResponse.ok()
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .body(BodyInserters.fromPublisher(Flux.fromIterable(list), DownloadModel.class)))
+        );}
 
     private Query filterByEmail(String email) {
         return new Query(
                 Criteria.where("email").is(email)
-        );
-    }
+        );}
     private Query filterByCategoryAndSubCategory(String category, String subcategory) {
         return new Query(
                 Criteria.where("categoryId").is(category).and("subCategoryName").is(subcategory)
-        );
-    }
-    private Query filterByCategory(String categoryId) {
+        );}
+    private Query filterByCategoryAndSubCategoryNull(String category) {
         return new Query(
-                Criteria.where("categoryId").is(categoryId)
-        );
+                Criteria.where("categoryId").is(category).and("subCategoryName").is("")
+        );}
+    private Query filterByUuid(String uuid) {
+        return new Query(Criteria.where("uuid").is(uuid));}
+
+    private Query filterByCategory(String categoryId) {
+        return new Query(Criteria.where("categoryId").is(categoryId));
     }
+    private Query filterByTimePeriod(LocalDateTime dateOne, LocalDateTime dateTwo) {
+        return new Query(
+                //Criteria.where("downloadsCreated").is(dateOne).and("subCategoryName").is("")
+                Criteria.where("downloadsCreated").gte(dateOne).andOperator(Criteria.where("downloadsCreated").lt(dateTwo))
+        );}
 }

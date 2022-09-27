@@ -12,7 +12,9 @@ import com.sofka.docs.values.PathDocument;
 import com.sofka.docs.values.SubcategoryName;
 import com.sofka.docs.values.UserId;
 
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Map;
 
 public class DocumentCreated extends DomainEvent {
@@ -23,7 +25,7 @@ public class DocumentCreated extends DomainEvent {
     private CategoryId categoryId;
     private CategoryDoc category;
     private String logHistory;
-    private LocalDate createdDate;
+    private LocalDateTime dateCreated;
     private Integer version;
     private SubcategoryName subcategoryName;
 
@@ -32,11 +34,12 @@ public class DocumentCreated extends DomainEvent {
     private Descriptiondoc description;
     private DocName docName;
 
+
     public DocName getDocName() {
         return docName;
     }
 
-    public DocumentCreated( CategoryId categoryId, Integer version, PathDocument pathDocument, BlockChainId blockChainId, Descriptiondoc description, DocName docName,SubcategoryName subcategoryName) {
+    public DocumentCreated( CategoryId categoryId, Integer version, PathDocument pathDocument, BlockChainId blockChainId, Descriptiondoc description, DocName docName,SubcategoryName subcategoryName,LocalDateTime dateCreated) {
         super("sofka.docs.documentcreated");
         this.categoryId = categoryId;
         this.version = version;
@@ -45,6 +48,7 @@ public class DocumentCreated extends DomainEvent {
         this.description = description;
         this.docName = docName;
         this.subcategoryName = subcategoryName;
+        this.dateCreated = dateCreated;
     }
 
     public LogHistoryId getLogHistoryId() {
@@ -81,5 +85,9 @@ public class DocumentCreated extends DomainEvent {
 
     public SubcategoryName getSubcategoryName() {
         return subcategoryName;
+    }
+
+    public LocalDateTime getCreatedDate() {
+        return dateCreated;
     }
 }

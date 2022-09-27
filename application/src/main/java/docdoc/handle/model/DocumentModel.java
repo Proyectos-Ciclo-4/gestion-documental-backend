@@ -2,8 +2,14 @@ package docdoc.handle.model;
 
 
 
-import java.time.Instant;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+@Document(collection = "documents")
 public class DocumentModel {
     protected String name;
 
@@ -12,13 +18,25 @@ public class DocumentModel {
     protected String subCategoryName;
 
     protected String categoryId;
-    protected Instant createdDate;
+    protected LocalDateTime dateCreated;
 
     protected Integer version;
     protected String pathDocument;
 
     protected String blockChainId;
     protected String description;
+
+    @Id
+    protected String uuid;
+
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
 
     public String getName() {
         return name;
@@ -52,12 +70,13 @@ public class DocumentModel {
         this.categoryId = categoryId;
     }
 
-    public Instant getCreatedDate() {
-        return createdDate;
+
+    public LocalDateTime getDateCreated() {
+        return dateCreated;
     }
 
-    public void setCreatedDate(Instant createdDate) {
-        this.createdDate = createdDate;
+    public void setDateCreated(LocalDateTime dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
     public Integer getVersion() {

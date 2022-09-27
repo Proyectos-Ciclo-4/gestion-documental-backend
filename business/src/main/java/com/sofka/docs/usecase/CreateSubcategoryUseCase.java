@@ -9,10 +9,10 @@ import com.sofka.docs.values.SubCategory;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public class AddSubcategoryUseCase extends UseCaseForCommand<CreateSubCategoryCommand> {
+public class CreateSubcategoryUseCase extends UseCaseForCommand<CreateSubCategoryCommand> {
     private final DocumentDomainEventRepository repository;
 
-    public AddSubcategoryUseCase(DocumentDomainEventRepository repository) {
+    public CreateSubcategoryUseCase(DocumentDomainEventRepository repository) {
         this.repository = repository;
     }
 

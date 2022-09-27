@@ -2,6 +2,10 @@ package com.sofka.docs.commands;
 
 import co.com.sofka.domain.generic.Command;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class CreateDocumentCommand extends Command {
 
     private String documentId;
@@ -13,6 +17,15 @@ public class CreateDocumentCommand extends Command {
     private String description;
     private String name;
     private String subCategoryName;
+    private LocalDateTime dateCreated;
+
+    public LocalDateTime getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(LocalDateTime dateCreated) {
+        this.dateCreated = dateCreated;
+    }
 
     public String getSubCategoryName() {
         return subCategoryName;
