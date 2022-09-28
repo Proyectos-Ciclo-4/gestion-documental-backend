@@ -9,6 +9,7 @@ import com.sofka.docs.usecase.CreateDownloadUseCase;
 import com.sofka.docs.usecase.CreateSubcategoryUseCase;
 import com.sofka.docs.usecase.CreateCategoryUseCase;
 import com.sofka.docs.usecase.CreateDocumentUseCase;
+import docdoc.handle.model.CategoryModel;
 import docdoc.handle.model.DocumentModel;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -81,6 +82,14 @@ public class CommandHandle {
                         DocumentModel.class,
                         "documents"
                 ).then(ServerResponse.ok().build()));
+    }
+    @Bean
+    public RouterFunction<ServerResponse> createCategory() {
+        return route(
+                POST("/category/create/test").and(accept(MediaType.APPLICATION_JSON)),
+                request -> template.save(request.bodyToMono(CategoryModel.class), "categories")
+                        .then(ServerResponse.ok().build())
+        );
     }
 
    /*@Bean
