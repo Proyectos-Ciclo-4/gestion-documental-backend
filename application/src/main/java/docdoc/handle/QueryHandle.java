@@ -137,6 +137,16 @@ public class QueryHandle {
                                 .body(BodyInserters.fromPublisher(Mono.just(element), DocumentModel.class)))
         );
     }
+    @Bean
+    public RouterFunction<ServerResponse> getUsersById() {
+        return route(
+                GET("/users/{id}"),
+                request -> template.findOne(filterByUid(request.pathVariable("id")), UserModel.class, "users")
+                        .flatMap(element -> ServerResponse.ok()
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .body(BodyInserters.fromPublisher(Mono.just(element), UserModel.class)))
+        );
+    }
     private Query filterByEmail(String email) {
         return new Query(
                 Criteria.where("email").is(email)
@@ -149,8 +159,8 @@ public class QueryHandle {
         return new Query(
                 Criteria.where("categoryId").is(category).and("subCategoryName").is("")
         );}
-    private Query filterByUuid(String uuid) {
-        return new Query(Criteria.where("id").is(uuid));}
+    private Query filterByUid(String uuid) {
+        return new Query(Criteria.where("uid").is(uuid));}
 
     private Query filterByCategory(String categoryId) {
         return new Query(Criteria.where("categoryId").is(categoryId));
