@@ -4,19 +4,20 @@ import co.com.sofka.domain.generic.DomainEvent;
 import com.sofka.docs.values.DocumentId;
 import com.sofka.docs.values.UserId;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 public class DownloadCreated extends DomainEvent {
 
     private DocumentId documentId;
     private UserId userId;
-
-    private LocalDateTime downloadsCreated;
+    private Instant downloadsCreated;
 
     public DownloadCreated() {
         super("sofka.docs.downloadcreated");
     }
-    public DownloadCreated( DocumentId documentId, UserId userId, LocalDateTime downloadsCreated) {
+
+    public DownloadCreated(DocumentId documentId, UserId userId, Instant downloadsCreated) {
         super("sofka.docs.downloadcreated");
         this.documentId = documentId;
         this.userId = userId;
@@ -39,11 +40,11 @@ public class DownloadCreated extends DomainEvent {
         this.userId = userId;
     }
 
-    public LocalDateTime getDownloadsCreated() {
+    public Instant getDownloadsCreated() {
         return downloadsCreated;
     }
 
-    public void setDownloadsCreated(LocalDateTime downloadsCreated) {
+    public void setDownloadsCreated(Instant downloadsCreated) {
         this.downloadsCreated = downloadsCreated;
     }
 }

@@ -9,11 +9,15 @@ import com.sofka.docs.values.UserId;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public class CreateDownloadUseCase extends UseCaseForCommand<CreateDownloadCommand>{
+import java.time.Instant;
+import java.time.LocalDateTime;
+
+public class CreateDownloadUseCase extends UseCaseForCommand<CreateDownloadCommand> {
     @Override
     public Flux<DomainEvent> apply(Mono<CreateDownloadCommand> createDownloadCommandMono) {
         return createDownloadCommandMono.flatMapIterable(command -> {
-            var download= new Download(DownloadId.of(command.getDownloadId()),
+            var download = new Download(
+                    DownloadId.of(command.getDownloadId()),
                     UserId.of(command.getUserId()),
                     DocumentId.of(command.getDocumentId()),
                     command.getDownloadsCreated());

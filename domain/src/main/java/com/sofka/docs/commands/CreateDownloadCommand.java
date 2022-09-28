@@ -2,21 +2,20 @@ package com.sofka.docs.commands;
 
 import co.com.sofka.domain.generic.Command;
 
+import java.time.Clock;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 
 public class CreateDownloadCommand extends Command {
     private String downloadId;
     private String documentId;
     private String userId;
+    private final Instant downloadsCreated = Instant.now();
 
-    private LocalDateTime downloadsCreated;
-
-    public LocalDateTime getDownloadsCreated() {
+    public Instant getDownloadsCreated() {
         return downloadsCreated;
-    }
-
-    public void setDownloadsCreated(LocalDateTime downloadsCreated) {
-        this.downloadsCreated = downloadsCreated;
     }
 
     public String getDownloadId() {
