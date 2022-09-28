@@ -3,6 +3,8 @@ spring:
     name: service
   data:
     mongodb:
-      database: gestion_doc
+      database: gestiondocumental
 server:
   port: 8080
+
+# database: gestion_doc
