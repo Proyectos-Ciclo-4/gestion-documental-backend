@@ -2,14 +2,15 @@ package docdoc.handle.model;
 
 import org.springframework.data.annotation.Id;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+
 
 public class DownloadModel {
     @Id
     protected String uuid;
     private String documentId;
     private String userId;
-    private LocalDateTime downloadsCreated;
+    private LocalDate downloadsCreated;
 
     public String getUuid() {
         return uuid;
@@ -35,11 +36,11 @@ public class DownloadModel {
         this.userId = userId;
     }
 
-    public LocalDateTime getDownloadsCreated() {
+    public LocalDate getDownloadsCreated() {
         return downloadsCreated;
     }
 
-    public void setDownloadsCreated(LocalDateTime downloadsCreated) {
+    public void setDownloadsCreated(LocalDate downloadsCreated) {
         this.downloadsCreated = downloadsCreated;
     }
 }

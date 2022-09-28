@@ -30,7 +30,6 @@ public class DocumentService {
             docFind.setDescription( IsNull.compareString(docSend.getDescription(), docFind.getDescription()) );
             docFind.setName( IsNull.compareString(docSend.getName(), docFind.getName()) );
             docFind.setSubCategoryName( IsNull.compareString(docSend.getSubCategoryName(), docFind.getSubCategoryName()) );
-            docFind.setDateCreated(docFind.getDateCreated());
             docFind.setUuid(docFind.getUuid());
 
             return documentRepository.save(docFind);

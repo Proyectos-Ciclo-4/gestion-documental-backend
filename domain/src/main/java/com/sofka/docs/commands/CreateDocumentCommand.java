@@ -17,7 +17,7 @@ public class CreateDocumentCommand extends Command {
     private String description;
     private String name;
     private String subCategoryName;
-    private Instant dateCreated = Instant.now();
+    private final Instant dateCreated = Instant.now();
 
     public Instant getDateCreated() {
         return dateCreated;

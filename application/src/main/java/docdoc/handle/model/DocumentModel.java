@@ -11,25 +11,25 @@ import java.time.LocalDateTime;
 
 @Document(collection = "documents")
 public class DocumentModel {
-
     protected String name;
-
     protected String userId;
-
     protected String subCategoryName;
-
     protected String categoryId;
-
     protected Integer version;
-
     protected String pathDocument;
-
     protected String blockChainId;
-
     protected String description;
+    protected LocalDateTime dateCreated;
     @Id
     protected String uuid;
 
+    public LocalDateTime getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(LocalDateTime dateCreated) {
+        this.dateCreated = dateCreated;
+    }
     public String getUuid() {
         return uuid;
     }

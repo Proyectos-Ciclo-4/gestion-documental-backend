@@ -48,7 +48,9 @@ public class Document extends AggregateEvent<DocumentId> {
                     VersionDocument version,
                     PathDocument pathDocument,
                     BlockChainId blockChainId,
-                    Descriptiondoc description,SubcategoryName subCategoryName, Instant dateCreated) {
+                    Descriptiondoc description,
+                    SubcategoryName subCategoryName,
+                    Instant dateCreated) {
         super(entityId);
         subscribe(new DocumentEventChange(this));
         appendChange(new DocumentCreated(categoryId, version.value(), pathDocument, blockChainId, description, name,subCategoryName,dateCreated)).apply();

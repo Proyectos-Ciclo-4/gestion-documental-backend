@@ -120,14 +120,23 @@ public class QueryHandle {
     public RouterFunction<ServerResponse> getDownloadsByTimePeriod() {
         return route(
                 GET("/downloads/{startDate}/{finalDate}"),
-                request -> template.find(filterByTimePeriod(LocalDateTime.parse(request.pathVariable("startDate"), DateTimeFormatter.ISO_DATE_TIME),
-                                LocalDateTime.parse(request.pathVariable("finalDate"),DateTimeFormatter.ISO_DATE_TIME)),DownloadModel.class, "downloads")
+                request -> template.find(filterByTimePeriod(LocalDate.parse(request.pathVariable("startDate")),
+                                LocalDate.parse(request.pathVariable("finalDate"))),DownloadModel.class, "downloads")
                         .collectList()
                         .flatMap(list -> ServerResponse.ok()
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .body(BodyInserters.fromPublisher(Flux.fromIterable(list), DownloadModel.class)))
         );}
-
+    @Bean
+    public RouterFunction<ServerResponse> getDocumentsById() {
+        return route(
+                GET("/documento/{id}"),
+                request -> template.findOne(filterById(request.pathVariable("id")), DocumentModel.class, "documents")
+                        .flatMap(element -> ServerResponse.ok()
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .body(BodyInserters.fromPublisher(Mono.just(element), DocumentModel.class)))
+        );
+    }
     private Query filterByEmail(String email) {
         return new Query(
                 Criteria.where("email").is(email)
@@ -141,14 +150,19 @@ public class QueryHandle {
                 Criteria.where("categoryId").is(category).and("subCategoryName").is("")
         );}
     private Query filterByUuid(String uuid) {
-        return new Query(Criteria.where("uuid").is(uuid));}
+        return new Query(Criteria.where("id").is(uuid));}
 
     private Query filterByCategory(String categoryId) {
         return new Query(Criteria.where("categoryId").is(categoryId));
     }
-    private Query filterByTimePeriod(LocalDateTime dateOne, LocalDateTime dateTwo) {
+    private Query filterByTimePeriod(LocalDate dateOne, LocalDate dateTwo) {
         return new Query(
                 //Criteria.where("downloadsCreated").is(dateOne).and("subCategoryName").is("")
                 Criteria.where("downloadsCreated").gte(dateOne).andOperator(Criteria.where("downloadsCreated").lt(dateTwo))
         );}
+    private Query filterById(String documentId) {
+        return new Query(
+                Criteria.where("_id").is(documentId)
+        );
+    }
 }
