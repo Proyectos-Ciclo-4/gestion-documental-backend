@@ -16,22 +16,19 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.Set;
 
 public class DocumentCreated extends DomainEvent {
 
-    //private String userId;
-    //  private Map<DocumentId, UserId> downloads;
-    private LogHistoryId logHistoryId;
     private CategoryId categoryId;
-    private CategoryDoc category;
-    private String logHistory;
+
     private Instant dateCreated;
 
     private Instant dateUpdated;
     private Integer version;
     private SubcategoryName subcategoryName;
     private PathDocument pathDocument;
-    private String blockChainId;
+    private Set<String> blockChainId;
     private Descriptiondoc description;
     private DocName docName;
 
@@ -39,7 +36,7 @@ public class DocumentCreated extends DomainEvent {
         return docName;
     }
 
-    public DocumentCreated(CategoryId categoryId, Integer version, PathDocument pathDocument, String blockChainId,
+    public DocumentCreated(CategoryId categoryId, Integer version, PathDocument pathDocument, Set<String> blockChainId,
                            Descriptiondoc description, DocName docName, SubcategoryName subcategoryName, Instant dateCreated, Instant dateUpdated) {
         super("sofka.docs.documentcreated");
         this.categoryId = categoryId;
@@ -53,24 +50,12 @@ public class DocumentCreated extends DomainEvent {
         this.dateUpdated = dateUpdated;
     }
 
-    public LogHistoryId getLogHistoryId() {
-        return logHistoryId;
-    }
-
-    public CategoryDoc getCategory() {
-        return category;
-    }
-
     public Descriptiondoc getDescription() {
         return description;
     }
 
     public CategoryId getCategoryId() {
         return categoryId;
-    }
-
-    public String getLogHistory() {
-        return logHistory;
     }
 
     public Integer getVersion() {
@@ -81,7 +66,7 @@ public class DocumentCreated extends DomainEvent {
         return pathDocument;
     }
 
-    public String getBlockChainId() {
+    public Set<String> getBlockChainId() {
         return blockChainId;
     }
 

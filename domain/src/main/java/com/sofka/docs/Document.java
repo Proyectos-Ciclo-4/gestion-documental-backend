@@ -48,7 +48,7 @@ public class Document extends AggregateEvent<DocumentId> {
                     CategoryId categoryId,
                     VersionDocument version,
                     PathDocument pathDocument,
-                    String blockChainId,
+                    Set<String> blockChainId,
                     Descriptiondoc description,
                     SubcategoryName subCategoryName,
                     Instant dateCreated,
