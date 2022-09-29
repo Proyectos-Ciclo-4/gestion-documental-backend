@@ -6,6 +6,15 @@ public class UserModel {
     private String email;
     private Integer tipo;
     private String nombre;
+    private String uid;
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 
     public String get_id() {
         return _id;

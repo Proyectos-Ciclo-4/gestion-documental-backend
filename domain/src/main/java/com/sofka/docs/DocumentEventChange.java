@@ -17,6 +17,7 @@ public class DocumentEventChange extends EventChange {
             document.subCategoryName = event.getSubcategoryName();
             document.dateCreated = event.getCreatedDate();
             document.dateUpdated = event.getCreatedDate();
+            document.lastDateDownloaded = event.getLastDateDownloaded();
         });
     }
 }

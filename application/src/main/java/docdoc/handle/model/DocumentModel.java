@@ -4,6 +4,7 @@ package docdoc.handle.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -18,16 +19,26 @@ public class DocumentModel {
     protected String pathDocument;
     protected Set<String> blockChainId;
     protected String description;
-    protected LocalDateTime dateCreated;
-    protected LocalDateTime dateUpload;
+    protected Instant dateCreated;
+    protected Instant dateUpload;
+
+    protected Instant lastDateDownload;
     @Id
     protected String uuid;
 
-    public LocalDateTime getDateCreated() {
+    public void setLastDateDownload(Instant lastDateDownload) {
+        this.lastDateDownload = lastDateDownload;
+    }
+
+    public Instant getLastDateDownload() {
+        return lastDateDownload;
+    }
+
+    public Instant getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(LocalDateTime dateCreated) {
+    public void setDateCreated(Instant dateCreated) {
         this.dateCreated = dateCreated;
     }
 
@@ -103,11 +114,11 @@ public class DocumentModel {
         this.description = description;
     }
 
-    public LocalDateTime getDateUpload() {
+    public Instant getDateUpload() {
         return dateUpload;
     }
 
-    public void setDateUpload(LocalDateTime dateUpload) {
+    public void setDateUpload(Instant dateUpload) {
         this.dateUpload = dateUpload;
     }
 }

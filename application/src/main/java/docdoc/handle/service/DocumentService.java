@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
+import java.time.Instant;
+
 @Service
 public class DocumentService {
 
@@ -29,13 +31,26 @@ public class DocumentService {
                     docFind.getBlockChainId().add(docSend.getBlockChainId().stream().findFirst().get());
                     docFind.setBlockChainId(docFind.getBlockChainId());
 
-                    docFind.setDateUpload(docSend.getDateUpload());
+                    docFind.setDateUpload(Instant.now());
+                    docFind.setLastDateDownload(IsNull.compareInstant(docSend.getLastDateDownload(), docFind.getLastDateDownload()));
 
                     docFind.setDescription(IsNull.compareString(docSend.getDescription(), docFind.getDescription()));
                     docFind.setName(IsNull.compareString(docSend.getName(), docFind.getName()));
                     docFind.setSubCategoryName(IsNull.compareString(docSend.getSubCategoryName(), docFind.getSubCategoryName()));
                     docFind.setUuid(docFind.getUuid());
 
+                    return documentRepository.save(docFind);
+
+                })
+                .map(update -> ResponseEntity.ok().<DocumentModel>build())
+                .defaultIfEmpty(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+
+    }
+
+    public Mono<ResponseEntity<DocumentModel>> updateDownloadDocument(String id, DocumentModel docSend) {
+
+        return documentRepository.findById(id).flatMap(docFind -> {
+                    docFind.setLastDateDownload(IsNull.compareInstant(docSend.getLastDateDownload(), docFind.getLastDateDownload()));
                     return documentRepository.save(docFind);
 
                 })

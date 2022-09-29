@@ -18,7 +18,10 @@ import reactor.test.StepVerifier;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+<<<<<<< HEAD
 import java.util.Set;
+=======
+>>>>>>> 16cae0e16187d9b7102cba1772080c0945b4f042
 
 import static org.mockito.Mockito.when;
 
@@ -30,6 +33,7 @@ public class CreateDocumentUseCaseTest {
     @Test
     void crearDocument() {
         var command = new CreateDocumentCommand();
+        command.set_id("test");
         command.setDocumentId("xxx");
         command.setDescription("test descriptiondoc");
         command.setCategoryId("cat01");
@@ -37,8 +41,15 @@ public class CreateDocumentUseCaseTest {
         command.setUserId("user1");
         command.setPathDocument("url");
         command.setVersion(1);
+<<<<<<< HEAD
         command.setBlockChainId(Set.of(""));
         command.setSubCategoryName("recursos");
+=======
+        var array=new HashSet<String>();
+        array.add("block");
+        command.setBlockChainId(array);
+        command.setSubCategoryName("subCategoryName");
+>>>>>>> 16cae0e16187d9b7102cba1772080c0945b4f042
 
         StepVerifier.create(useCase.apply(Mono.just(command)))
                 .expectNextMatches(

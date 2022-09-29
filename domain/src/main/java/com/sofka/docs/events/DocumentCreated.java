@@ -19,14 +19,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class DocumentCreated extends DomainEvent {
-
-    private String _id;
-
-    private CategoryId categoryId;
-
-    private Instant dateCreated;
-
-    private Instant dateUpdated;
+        private CategoryId categoryId;
     private Integer version;
     private SubcategoryName subcategoryName;
     private PathDocument pathDocument;
@@ -34,12 +27,19 @@ public class DocumentCreated extends DomainEvent {
     private Descriptiondoc description;
     private DocName docName;
 
+    private Instant dateCreated;
+
+    private Instant dateUpdated;
+
+    private Instant lastDateDownloaded;
+
     public DocName getDocName() {
         return docName;
     }
 
     public DocumentCreated(CategoryId categoryId, Integer version, PathDocument pathDocument, Set<String> blockChainId,
-                           Descriptiondoc description, DocName docName, SubcategoryName subcategoryName, Instant dateCreated, Instant dateUpdated) {
+                           Descriptiondoc description, DocName docName, SubcategoryName subcategoryName, Instant dateCreated,
+                           Instant dateUpdated, Instant lastDateDownloaded) {
         super("sofka.docs.documentcreated");
         this.categoryId = categoryId;
         this.version = version;
@@ -50,6 +50,11 @@ public class DocumentCreated extends DomainEvent {
         this.subcategoryName = subcategoryName;
         this.dateCreated = dateCreated;
         this.dateUpdated = dateUpdated;
+        this.lastDateDownloaded = lastDateDownloaded;
+    }
+
+    public Instant getLastDateDownloaded() {
+        return lastDateDownloaded;
     }
 
     public Descriptiondoc getDescription() {
@@ -84,7 +89,18 @@ public class DocumentCreated extends DomainEvent {
         return dateUpdated;
     }
 
-    public String get_id() {
-        return _id;
+    @Override
+    public String toString() {
+        return "DocumentCreated{" +
+                "categoryId=" + categoryId +
+                ", dateCreated=" + dateCreated +
+                ", dateUpdated=" + dateUpdated +
+                ", version=" + version +
+                ", subcategoryName=" + subcategoryName +
+                ", pathDocument=" + pathDocument +
+                ", blockChainId=" + blockChainId +
+                ", description=" + description +
+                ", docName=" + docName +
+                '}';
     }
 }

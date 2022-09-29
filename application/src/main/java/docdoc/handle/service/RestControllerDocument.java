@@ -24,4 +24,9 @@ public class RestControllerDocument {
         return service.updateDocument(id, documentModel);
     }
 
+    @PutMapping("/update/lastDownload/{id}")
+    public Mono<ResponseEntity<DocumentModel>> updateDownloadDocument(@PathVariable String id, @RequestBody DocumentModel documentModel) {
+        return service.updateDownloadDocument(id, documentModel);
+    }
+
 }

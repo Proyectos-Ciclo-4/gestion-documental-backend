@@ -43,6 +43,8 @@ public class Document extends AggregateEvent<DocumentId> {
 
     protected Instant dateUpdated;
 
+    protected Instant lastDateDownloaded;
+
     public Document(DocumentId entityId,
                     DocName name,
                     CategoryId categoryId,
@@ -52,11 +54,12 @@ public class Document extends AggregateEvent<DocumentId> {
                     Descriptiondoc description,
                     SubcategoryName subCategoryName,
                     Instant dateCreated,
-                    Instant dateUpdated) {
+                    Instant dateUpdated,
+                    Instant lastDateDownloaded) {
         super(entityId);
         subscribe(new DocumentEventChange(this));
         appendChange(new DocumentCreated(categoryId, version.value(), pathDocument, blockChainId, description,
-                name, subCategoryName, dateCreated, dateUpdated)).apply();
+                name, subCategoryName, dateCreated, dateUpdated, lastDateDownloaded)).apply();
 
     }
 
@@ -70,6 +73,7 @@ public class Document extends AggregateEvent<DocumentId> {
         events.forEach(document::applyEvent);
         return document;
     }
+
 
     public void createCategory(CategoryName categoryName) {
         var categoryId = new CategoryId();
