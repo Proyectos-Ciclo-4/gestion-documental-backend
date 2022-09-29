@@ -16,30 +16,28 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.Set;
 
 public class DocumentCreated extends DomainEvent {
 
-    //private String userId;
-    //  private Map<DocumentId, UserId> downloads;
-    private LogHistoryId logHistoryId;
     private CategoryId categoryId;
-    private CategoryDoc category;
-    private String logHistory;
+
     private Instant dateCreated;
+
+    private Instant dateUpdated;
     private Integer version;
     private SubcategoryName subcategoryName;
     private PathDocument pathDocument;
-    private BlockChainId blockChainId;
+    private Set<String> blockChainId;
     private Descriptiondoc description;
     private DocName docName;
-
 
     public DocName getDocName() {
         return docName;
     }
 
-    public DocumentCreated(CategoryId categoryId, Integer version, PathDocument pathDocument, BlockChainId blockChainId,
-                           Descriptiondoc description, DocName docName, SubcategoryName subcategoryName, Instant dateCreated) {
+    public DocumentCreated(CategoryId categoryId, Integer version, PathDocument pathDocument, Set<String> blockChainId,
+                           Descriptiondoc description, DocName docName, SubcategoryName subcategoryName, Instant dateCreated, Instant dateUpdated) {
         super("sofka.docs.documentcreated");
         this.categoryId = categoryId;
         this.version = version;
@@ -49,14 +47,7 @@ public class DocumentCreated extends DomainEvent {
         this.docName = docName;
         this.subcategoryName = subcategoryName;
         this.dateCreated = dateCreated;
-    }
-
-    public LogHistoryId getLogHistoryId() {
-        return logHistoryId;
-    }
-
-    public CategoryDoc getCategory() {
-        return category;
+        this.dateUpdated = dateUpdated;
     }
 
     public Descriptiondoc getDescription() {
@@ -67,10 +58,6 @@ public class DocumentCreated extends DomainEvent {
         return categoryId;
     }
 
-    public String getLogHistory() {
-        return logHistory;
-    }
-
     public Integer getVersion() {
         return version;
     }
@@ -79,7 +66,7 @@ public class DocumentCreated extends DomainEvent {
         return pathDocument;
     }
 
-    public BlockChainId getBlockChainId() {
+    public Set<String> getBlockChainId() {
         return blockChainId;
     }
 
@@ -89,5 +76,9 @@ public class DocumentCreated extends DomainEvent {
 
     public Instant getCreatedDate() {
         return dateCreated;
+    }
+
+    public Instant getDateUpdated() {
+        return dateUpdated;
     }
 }

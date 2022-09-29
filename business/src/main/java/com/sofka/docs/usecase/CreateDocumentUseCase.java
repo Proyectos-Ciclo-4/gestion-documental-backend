@@ -14,22 +14,24 @@ import com.sofka.docs.values.VersionDocument;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.time.Instant;
+import java.util.Set;
 
 public class CreateDocumentUseCase extends UseCaseForCommand<CreateDocumentCommand> {
 
     @Override
     public Flux<DomainEvent> apply(Mono<CreateDocumentCommand> crearDocumentcommand) {
         return crearDocumentcommand.flatMapIterable(command -> {
+
             var document = new Document(DocumentId.of(command.getDocumentId()),
                     new DocName(command.getName()),
                     new CategoryId(command.getCategoryId()),
                     new VersionDocument(command.getVersion()),
                     new PathDocument(command.getPathDocument()),
-                    new BlockChainId(command.getBlockChainId()),
+                    command.getBlockChainId(),
                     new Descriptiondoc(command.getDescription()),
                     new SubcategoryName(command.getSubCategoryName()),
-                    command.getDateCreated());
+                    command.getDateCreated(),
+                    command.getDateUpdated());
             return document.getUncommittedChanges();
         });
     }

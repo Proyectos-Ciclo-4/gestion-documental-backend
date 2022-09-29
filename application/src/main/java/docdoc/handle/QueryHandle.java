@@ -54,6 +54,27 @@ public class QueryHandle {
         );
     }
     @Bean
+    public RouterFunction<ServerResponse> getSubcategoryByFilterToCompare() {
+        return route(
+                GET("/subcategory/compare/{categoryId}/{subcategory}"),
+                request -> template.find(filterByCategoryAndSubCategory(request.pathVariable("categoryId"),request.pathVariable("subcategory")),SubcategoryModel.class, "subcategories")
+                        .collectList()
+                        .flatMap(list -> ServerResponse.ok()
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .body(BodyInserters.fromPublisher(Flux.fromIterable(list), SubcategoryModel.class)))
+        );}
+    @Bean
+    public RouterFunction<ServerResponse> getCategoryToCompare() {
+        return route(
+                GET("/category/compare/{categoryName}"),
+                request -> template.find(filterCategoryByName(request.pathVariable("categoryName")), CategoryModel.class, "categories")
+                        .collectList()
+                        .flatMap(list -> ServerResponse.ok()
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .body(BodyInserters.fromPublisher(Flux.fromIterable(list), CategoryModel.class)))
+        );
+    }
+    @Bean
     public RouterFunction<ServerResponse> getAllCategories() {
         return route(
                 GET("/category/getall"),
@@ -150,6 +171,10 @@ public class QueryHandle {
     private Query filterByEmail(String email) {
         return new Query(
                 Criteria.where("email").is(email)
+        );}
+    private Query filterCategoryByName(String categoryName) {
+        return new Query(
+                Criteria.where("categoryName").is(categoryName)
         );}
     private Query filterByCategoryAndSubCategory(String category, String subcategory) {
         return new Query(

@@ -13,9 +13,10 @@ public class DocumentEventChange extends EventChange {
             document.pathDocument = event.getPathDocument();
             document.categoryId = event.getCategoryId();
             document.version = new VersionDocument(event.getVersion());
-            document.blockChainId = event.getBlockChainId();
+            document.blockChainId.addAll(event.getBlockChainId());
             document.subCategoryName = event.getSubcategoryName();
-            document.dateCreated= event.getCreatedDate();
+            document.dateCreated = event.getCreatedDate();
+            document.dateUpdated = event.getCreatedDate();
         });
     }
 }

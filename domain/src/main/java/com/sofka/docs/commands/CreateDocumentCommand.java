@@ -1,10 +1,13 @@
 package com.sofka.docs.commands;
 
 import co.com.sofka.domain.generic.Command;
+import com.sofka.docs.values.BlockChainId;
 
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
 
 public class CreateDocumentCommand extends Command {
 
@@ -13,11 +16,17 @@ public class CreateDocumentCommand extends Command {
     private String categoryId;
     private Integer version;
     private String pathDocument;
-    private String blockChainId;
+    private Set<String> blockChainId;
     private String description;
     private String name;
     private String subCategoryName;
     private final Instant dateCreated = Instant.now();
+
+    private final Instant dateUpdated = Instant.now();
+
+    public Instant getDateUpdated() {
+        return dateUpdated;
+    }
 
     public Instant getDateCreated() {
         return dateCreated;
@@ -59,7 +68,7 @@ public class CreateDocumentCommand extends Command {
         return pathDocument;
     }
 
-    public String getBlockChainId() {
+    public Set<String> getBlockChainId() {
         return blockChainId;
     }
 
@@ -87,7 +96,7 @@ public class CreateDocumentCommand extends Command {
         this.pathDocument = pathDocument;
     }
 
-    public void setBlockChainId(String blockChainId) {
+    public void setBlockChainId(Set<String> blockChainId) {
         this.blockChainId = blockChainId;
     }
 

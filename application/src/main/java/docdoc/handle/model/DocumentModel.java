@@ -1,25 +1,25 @@
 package docdoc.handle.model;
 
 
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Document(collection = "documents")
 public class DocumentModel {
+
     protected String name;
     protected String userId;
     protected String subCategoryName;
     protected String categoryId;
     protected Integer version;
     protected String pathDocument;
-    protected String blockChainId;
+    protected Set<String> blockChainId;
     protected String description;
     protected LocalDateTime dateCreated;
+    protected LocalDateTime dateUpload;
     @Id
     protected String uuid;
 
@@ -30,6 +30,7 @@ public class DocumentModel {
     public void setDateCreated(LocalDateTime dateCreated) {
         this.dateCreated = dateCreated;
     }
+
     public String getUuid() {
         return uuid;
     }
@@ -86,11 +87,11 @@ public class DocumentModel {
         this.pathDocument = pathDocument;
     }
 
-    public String getBlockChainId() {
+    public Set<String> getBlockChainId() {
         return blockChainId;
     }
 
-    public void setBlockChainId(String blockChainId) {
+    public void setBlockChainId(Set<String> blockChainId) {
         this.blockChainId = blockChainId;
     }
 
@@ -100,5 +101,13 @@ public class DocumentModel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public LocalDateTime getDateUpload() {
+        return dateUpload;
+    }
+
+    public void setDateUpload(LocalDateTime dateUpload) {
+        this.dateUpload = dateUpload;
     }
 }
