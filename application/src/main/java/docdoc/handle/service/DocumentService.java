@@ -47,10 +47,10 @@ public class DocumentService {
 
     }
 
-    public Mono<ResponseEntity<DocumentModel>> updateDownloadDocument(String id, DocumentModel docSend) {
+    public Mono<ResponseEntity<DocumentModel>> updateDownloadDocument(String id) {
 
         return documentRepository.findById(id).flatMap(docFind -> {
-                    docFind.setLastDateDownload(IsNull.compareInstant(docSend.getLastDateDownload(), docFind.getLastDateDownload()));
+                    docFind.setLastDateDownload(Instant.now());
                     return documentRepository.save(docFind);
 
                 })
