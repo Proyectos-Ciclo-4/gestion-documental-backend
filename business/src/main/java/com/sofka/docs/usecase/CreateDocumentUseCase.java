@@ -22,7 +22,8 @@ public class CreateDocumentUseCase extends UseCaseForCommand<CreateDocumentComma
     public Flux<DomainEvent> apply(Mono<CreateDocumentCommand> crearDocumentcommand) {
         return crearDocumentcommand.flatMapIterable(command -> {
 
-            var document = new Document(DocumentId.of(command.getDocumentId()),
+            var document = new Document(
+                    DocumentId.of(command.getDocumentId()),
                     new DocName(command.getName()),
                     new CategoryId(command.getCategoryId()),
                     new VersionDocument(command.getVersion()),

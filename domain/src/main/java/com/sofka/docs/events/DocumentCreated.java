@@ -20,6 +20,8 @@ import java.util.Set;
 
 public class DocumentCreated extends DomainEvent {
 
+    private String _id;
+
     private CategoryId categoryId;
 
     private Instant dateCreated;
@@ -80,5 +82,9 @@ public class DocumentCreated extends DomainEvent {
 
     public Instant getDateUpdated() {
         return dateUpdated;
+    }
+
+    public String get_id() {
+        return _id;
     }
 }

@@ -11,7 +11,7 @@ import java.util.Set;
 
 public class CreateDocumentCommand extends Command {
 
-    private String documentId;
+    private String _id;
     private String userId;
     private String categoryId;
     private Integer version;
@@ -49,7 +49,7 @@ public class CreateDocumentCommand extends Command {
     }
 
     public String getDocumentId() {
-        return documentId;
+        return _id;
     }
 
     public String getUserId() {
@@ -77,7 +77,7 @@ public class CreateDocumentCommand extends Command {
     }
 
     public void setDocumentId(String documentId) {
-        this.documentId = documentId;
+        this._id = documentId;
     }
 
     public void setUserId(String userId) {
