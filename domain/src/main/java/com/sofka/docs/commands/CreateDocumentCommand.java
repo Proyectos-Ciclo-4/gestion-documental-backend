@@ -1,6 +1,7 @@
 package com.sofka.docs.commands;
 
 import co.com.sofka.domain.generic.Command;
+import com.sofka.docs.values.BlockChainId;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -18,6 +19,12 @@ public class CreateDocumentCommand extends Command {
     private String name;
     private String subCategoryName;
     private final Instant dateCreated = Instant.now();
+
+    private final Instant dateUpdated = Instant.now();
+
+    public Instant getDateUpdated() {
+        return dateUpdated;
+    }
 
     public Instant getDateCreated() {
         return dateCreated;

@@ -26,20 +26,21 @@ public class DocumentCreated extends DomainEvent {
     private CategoryDoc category;
     private String logHistory;
     private Instant dateCreated;
+
+    private Instant dateUpdated;
     private Integer version;
     private SubcategoryName subcategoryName;
     private PathDocument pathDocument;
-    private BlockChainId blockChainId;
+    private String blockChainId;
     private Descriptiondoc description;
     private DocName docName;
-
 
     public DocName getDocName() {
         return docName;
     }
 
-    public DocumentCreated(CategoryId categoryId, Integer version, PathDocument pathDocument, BlockChainId blockChainId,
-                           Descriptiondoc description, DocName docName, SubcategoryName subcategoryName, Instant dateCreated) {
+    public DocumentCreated(CategoryId categoryId, Integer version, PathDocument pathDocument, String blockChainId,
+                           Descriptiondoc description, DocName docName, SubcategoryName subcategoryName, Instant dateCreated, Instant dateUpdated) {
         super("sofka.docs.documentcreated");
         this.categoryId = categoryId;
         this.version = version;
@@ -49,6 +50,7 @@ public class DocumentCreated extends DomainEvent {
         this.docName = docName;
         this.subcategoryName = subcategoryName;
         this.dateCreated = dateCreated;
+        this.dateUpdated = dateUpdated;
     }
 
     public LogHistoryId getLogHistoryId() {
@@ -79,7 +81,7 @@ public class DocumentCreated extends DomainEvent {
         return pathDocument;
     }
 
-    public BlockChainId getBlockChainId() {
+    public String getBlockChainId() {
         return blockChainId;
     }
 
@@ -89,5 +91,9 @@ public class DocumentCreated extends DomainEvent {
 
     public Instant getCreatedDate() {
         return dateCreated;
+    }
+
+    public Instant getDateUpdated() {
+        return dateUpdated;
     }
 }

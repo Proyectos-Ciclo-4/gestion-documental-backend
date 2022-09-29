@@ -14,8 +14,6 @@ import com.sofka.docs.values.VersionDocument;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.time.Instant;
-
 public class CreateDocumentUseCase extends UseCaseForCommand<CreateDocumentCommand> {
 
     @Override
@@ -26,10 +24,11 @@ public class CreateDocumentUseCase extends UseCaseForCommand<CreateDocumentComma
                     new CategoryId(command.getCategoryId()),
                     new VersionDocument(command.getVersion()),
                     new PathDocument(command.getPathDocument()),
-                    new BlockChainId(command.getBlockChainId()),
+                    command.getBlockChainId(),
                     new Descriptiondoc(command.getDescription()),
                     new SubcategoryName(command.getSubCategoryName()),
-                    command.getDateCreated());
+                    command.getDateCreated(),
+                    command.getDateUpdated());
             return document.getUncommittedChanges();
         });
     }

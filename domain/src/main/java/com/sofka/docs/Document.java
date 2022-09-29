@@ -20,10 +20,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 public class Document extends AggregateEvent<DocumentId> {
-
-    protected Map<DocumentId, UserId> downloads;
 
     protected DocName name;
 
@@ -37,23 +36,27 @@ public class Document extends AggregateEvent<DocumentId> {
     protected VersionDocument version;
     protected PathDocument pathDocument;
 
-    protected BlockChainId blockChainId;
+    protected Set<String> blockChainId;
     protected Descriptiondoc description;
 
     protected Instant dateCreated;
+
+    protected Instant dateUpdated;
 
     public Document(DocumentId entityId,
                     DocName name,
                     CategoryId categoryId,
                     VersionDocument version,
                     PathDocument pathDocument,
-                    BlockChainId blockChainId,
+                    String blockChainId,
                     Descriptiondoc description,
                     SubcategoryName subCategoryName,
-                    Instant dateCreated) {
+                    Instant dateCreated,
+                    Instant dateUpdated) {
         super(entityId);
         subscribe(new DocumentEventChange(this));
-        appendChange(new DocumentCreated(categoryId, version.value(), pathDocument, blockChainId, description, name,subCategoryName,dateCreated)).apply();
+        appendChange(new DocumentCreated(categoryId, version.value(), pathDocument, blockChainId, description,
+                name, subCategoryName, dateCreated, dateUpdated)).apply();
 
     }
 
