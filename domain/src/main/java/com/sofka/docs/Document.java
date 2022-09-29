@@ -71,6 +71,7 @@ public class Document extends AggregateEvent<DocumentId> {
         return document;
     }
 
+
     public void createCategory(CategoryName categoryName) {
         var categoryId = new CategoryId();
         Objects.requireNonNull(categoryName);
