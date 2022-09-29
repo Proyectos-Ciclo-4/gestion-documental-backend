@@ -81,4 +81,19 @@ public class DocumentCreated extends DomainEvent {
     public Instant getDateUpdated() {
         return dateUpdated;
     }
+
+    @Override
+    public String toString() {
+        return "DocumentCreated{" +
+                "categoryId=" + categoryId +
+                ", dateCreated=" + dateCreated +
+                ", dateUpdated=" + dateUpdated +
+                ", version=" + version +
+                ", subcategoryName=" + subcategoryName +
+                ", pathDocument=" + pathDocument +
+                ", blockChainId=" + blockChainId +
+                ", description=" + description +
+                ", docName=" + docName +
+                '}';
+    }
 }

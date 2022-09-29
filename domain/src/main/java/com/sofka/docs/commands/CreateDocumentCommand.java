@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 public class CreateDocumentCommand extends Command {
-
+    private String _id;
     private String documentId;
     private String userId;
     private String categoryId;
@@ -23,6 +23,14 @@ public class CreateDocumentCommand extends Command {
     private final Instant dateCreated = Instant.now();
 
     private final Instant dateUpdated = Instant.now();
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
+    }
 
     public Instant getDateUpdated() {
         return dateUpdated;
