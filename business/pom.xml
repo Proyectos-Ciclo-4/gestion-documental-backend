@@ -41,7 +41,7 @@
         </dependency>
 
         <dependency>
-            <groupId>com.sofka.docs</groupId>
+            <groupId>com.sofka.docdoc</groupId>
             <artifactId>domain</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
