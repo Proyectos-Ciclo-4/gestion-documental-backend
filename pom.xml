@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
+    <groupId>com.sofka.docdoc</groupId>
+    <artifactId>SofkaDocDoc</artifactId>
     <packaging>pom</packaging>
+    <name>SofkaDocDoc</name>
+    <version>0.0.1-SNAPSHOT</version>
+    <description>SofkaDocDoc</description>
+
     <modules>
         <module>domain</module>
         <module>business</module>
         <module>application</module>
     </modules>
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.3</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
-    <groupId>com.sofka.docdoc</groupId>
-    <artifactId>SofkaDocDoc</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>SofkaDocDoc</name>
-    <description>SofkaDocDoc</description>
+
     <properties>
+        <springboot.version>2.7.3</springboot.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <java.version>11</java.version>
