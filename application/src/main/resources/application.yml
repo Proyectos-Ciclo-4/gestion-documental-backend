@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: service
+  data:
+    mongodb:
+      database: gestiondocumental
+server:
+  port: 8080
