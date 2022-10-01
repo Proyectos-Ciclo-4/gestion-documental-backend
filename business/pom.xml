@@ -10,6 +10,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>business</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>business</name>
+    <description>business for application</description>
+
     <dependencies>
         <dependency>
             <groupId>io.projectreactor</groupId>
@@ -39,12 +43,19 @@
             <artifactId>junit-jupiter-api</artifactId>
             <version>5.8.2</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.sofka.docdoc</groupId>
+            <artifactId>domain</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>co.com.sofka</groupId>
+            <artifactId>business</artifactId>
+            <version>1.5.0</version>
+        </dependency>
+
     </dependencies>
-
-    <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
 </project>

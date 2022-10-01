@@ -1,0 +1,14 @@
+package com.sofka.docdoc.values;
+
+import co.com.sofka.domain.generic.Identity;
+
+public class UserId extends Identity {
+    public UserId(String uuid){
+        super(uuid);
+    }
+
+    public UserId(){
+
+    }
+    public static UserId of(String uuid) {return new UserId(uuid);}
+}
