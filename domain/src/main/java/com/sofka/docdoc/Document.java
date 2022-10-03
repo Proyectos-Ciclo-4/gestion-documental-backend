@@ -42,7 +42,7 @@ public class Document extends AggregateEvent<DocumentId> {
 
     protected Instant lastDateDownloaded;
 
-    public Document(DocumentId entityId,
+    public Document(DocumentId _id,
                     DocName name,
                     CategoryId categoryId,
                     VersionDocument version,
@@ -53,7 +53,7 @@ public class Document extends AggregateEvent<DocumentId> {
                     Instant dateCreated,
                     Instant dateUpdated,
                     Instant lastDateDownloaded) {
-        super(entityId);
+        super(_id);
         subscribe(new DocumentEventChange(this));
         appendChange(new DocumentCreated(categoryId, version.value(), pathDocument, blockChainId, description,
                 name, subCategoryName, dateCreated, dateUpdated, lastDateDownloaded)).apply();
